@@ -48,10 +48,11 @@ dependencies {
     //room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
     kapt(libs.androidx.room.compiler)
 
     //paging
-    implementation(libs.androidx.paging.runtime)
+//    implementation(libs.androidx.paging.runtime)
 
     //hilt
     implementation(libs.dagger.hilt.android)

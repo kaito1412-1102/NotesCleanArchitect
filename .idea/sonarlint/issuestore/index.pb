@@ -34,8 +34,6 @@ k
 ;core/data/src/test/java/com/example/data/ExampleUnitTest.kt,e\4\e45b9f23cfbbfd6ab570805e7a7d59dde6dfa210
 o
 ?core/domain/src/test/java/com/example/domain/ExampleUnitTest.kt,9\e\9e8adfe8197083080df62ccd1a9135de20fdd451
-n
->core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
 p
 @core/database/src/main/java/com/example/database/NoteDatabase.kt,5\f\5f7740087985630f7f8b7b0302ae5479ba0a12d8
 L
@@ -60,12 +58,6 @@ s
 Ccore/database/src/test/java/com/example/database/ExampleUnitTest.kt,f\8\f84c6e3dbd2a118b05a913e1fa0a56ad152fdffb
 P
  core/database/proguard-rules.pro,2\e\2e9660545da35c546447e7df6e72a7dadd74cade
-K
-core/model/build.gradle.kts,9\3\934dbdec0dfe573cbf98bf8707c0766a31a96299
-L
-core/domain/build.gradle.kts,f\6\f6899d750c55b14a51220f253d74a5cc3ad0be8b
-@
-build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 b
 2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
 n
@@ -78,7 +70,5 @@ E
 core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
 i
 9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
-k
-;core/domain/src/main/java/com/example/domain/NoteUseCase.kt,e\7\e727a6f3c8d3b1a9947cc4bcdd4382955c5d9bab
 Å
 Qapp/src/main/java/com/example/notescleanarchitecture/presentation/NoteFragment.kt,d\b\db95635a5dd347e50ce4c024795c130e6d0d3455

@@ -1,6 +1,5 @@
 package com.example.database.dao
 
-import androidx.paging.DataSource
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
@@ -17,8 +16,8 @@ interface NoteDao {
     @Query("SELECT * FROM note WHERE id =:id")
     suspend fun getNoteEntity(id: Long): NoteEntity?
 
-    @Query("SELECT * FROM note LIMIT :limit OFFSET:offset")
-    suspend fun getAllNoteEntity(limit: Int, offset: Int): List<NoteEntity>
+    @Query("SELECT * FROM note")
+    fun getAllNoteEntity(): PagingSource<Int, NoteEntity>
 
     @Delete
     suspend fun deleteNoteEntity(noteEntity: NoteEntity)

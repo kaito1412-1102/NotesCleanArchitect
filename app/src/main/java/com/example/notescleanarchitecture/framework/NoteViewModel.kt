@@ -3,8 +3,11 @@ package com.example.notescleanarchitecture.framework
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.example.domain.NoteUseCase
 import com.example.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,7 +52,9 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
         coroutineScope.launch {
             _noteUiState.emit(NoteUiState.Loading)
             noteUseCase.getAllNote.invoke().cachedIn(viewModelScope).collect {
-                _noteUiState.emit(NoteUiState.GetNotesSuccess(it))
+                _noteUiState.emit(
+                    NoteUiState.GetNotesSuccess(it)
+                )
             }
         }
     }

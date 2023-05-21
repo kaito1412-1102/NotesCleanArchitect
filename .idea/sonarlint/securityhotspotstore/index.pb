@@ -42,8 +42,6 @@ D
 core/data/.gitignore,c\0\c09c1c6fa3044c77a3865bc29c350cc200bb9d1e
 E
 core/model/.gitignore,f\8\f8ab35f50529f745f0a04441caf4e25284af0c14
-n
->core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
 V
 &core/data/src/main/AndroidManifest.xml,8\5\8501204f5056e1b929ecc228b7a33d68fe324458
 q
@@ -60,14 +58,8 @@ Z
 Rcore/database/src/androidTest/java/com/example/database/ExampleInstrumentedTest.kt,7\9\7943f46b1d8746f94382f36388ccbdfd0e5d146a
 P
  core/database/proguard-rules.pro,2\e\2e9660545da35c546447e7df6e72a7dadd74cade
-K
-core/model/build.gradle.kts,9\3\934dbdec0dfe573cbf98bf8707c0766a31a96299
-L
-core/domain/build.gradle.kts,f\6\f6899d750c55b14a51220f253d74a5cc3ad0be8b
 b
 2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
-@
-build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 n
 >core/domain/src/main/java/com/example/domain/AddNoteUseCase.kt,d\b\db693c9efdb8d22eff77cdc096863f6798429792
 |
@@ -78,7 +70,5 @@ E
 core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
 i
 9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
-k
-;core/domain/src/main/java/com/example/domain/NoteUseCase.kt,e\7\e727a6f3c8d3b1a9947cc4bcdd4382955c5d9bab
 Å
 Qapp/src/main/java/com/example/notescleanarchitecture/presentation/NoteFragment.kt,d\b\db95635a5dd347e50ce4c024795c130e6d0d3455

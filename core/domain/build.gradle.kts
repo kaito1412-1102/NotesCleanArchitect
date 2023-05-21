@@ -35,6 +35,7 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.room.paging)
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

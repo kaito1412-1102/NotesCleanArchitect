@@ -42,8 +42,11 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
 
+    //room-paging
+    implementation(libs.androidx.room.paging)
+
     //paging
-    implementation(libs.androidx.paging.runtime)
+//    implementation(libs.androidx.paging.runtime)
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

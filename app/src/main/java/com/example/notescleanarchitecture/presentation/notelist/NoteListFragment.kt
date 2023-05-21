@@ -6,8 +6,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.map
 import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
@@ -17,6 +18,8 @@ import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
 import com.example.notescleanarchitecture.presentation.collectLifeCycleFlow
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::inflate), NoteAdapter.OnNoteClickListener {
@@ -41,6 +44,9 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         binding.swipeRefreshLayout.setOnRefreshListener {
             noteAdapter.refresh()
         }
+        binding.buttonTest.setOnClickListener {
+            Log.d("tuanminh", "collectData: ${noteAdapter.snapshot().items.size}")
+        }
     }
 
     private fun initView() {
@@ -59,16 +65,17 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
 
                 is NoteViewModel.NoteUiState.GetNoteSuccess -> {}
                 is NoteViewModel.NoteUiState.GetNotesSuccess -> {
-                    Log.d("tuanminh", "collectData: success")
+                    Log.d("tuanminh", "collectData: success ")
                     binding.swipeRefreshLayout.isRefreshing = false
                     noteAdapter.submitData(it.notes)
                 }
             }
         })
         collectLifeCycleFlow(noteAdapter.loadStateFlow) {
+            Log.d("tuanminh", "collectData: loading")
             binding.progressBar.isVisible = it.source.append is LoadState.Loading
         }
-        if(!isInit){
+        if (!isInit) {
             viewModel.getAllNotes()
             isInit = true
         }
