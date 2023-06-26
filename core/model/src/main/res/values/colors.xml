@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_todo">#b8cae3</color>
+    <color name="status_done">#82b99f</color>
+    
+    <color name="deadline_tag_today">#e38a8b</color>
+    <color name="bg_note_today">#e5ece4</color>
+
+    <color name="deadline_tag_upcoming">#9cd0ea</color>
+    <color name="bg_note_upcoming">#ffffff</color>
+
+    <color name="deadline_tag_overdue">#9ea0a1</color>
+    <color name="bg_note_overdue">#e2e1e4</color>
+</resources>

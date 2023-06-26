@@ -1,14 +1,21 @@
 package com.example.notescleanarchitecture.presentation.notedetail
 
-import android.util.Log
+import android.R.color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.model.Note
+import com.example.model.toDeadlineTag
+import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.ItemNoteBinding
-import com.example.notescleanarchitecture.presentation.formatDate
+import com.example.notescleanarchitecture.extension.formatDate
+import com.example.notescleanarchitecture.extension.formatDateStyle1
+import com.example.notescleanarchitecture.utils.Constants
+
 
 class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter<Note, NoteAdapter.NoteViewHolder>(DataComparator) {
 //    private val listNote = mutableListOf<Note>()
@@ -34,7 +41,7 @@ class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter
     inner class NoteViewHolder(private val binding: ItemNoteBinding) : ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                getItem(bindingAdapterPosition)?.let {note->
+                getItem(bindingAdapterPosition)?.let { note ->
                     listener.onNoteItemClick(note)
                 }
             }
@@ -44,7 +51,25 @@ class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter
             binding.apply {
                 title.text = note?.title
                 content.text = note?.content
-                lastUpdate.text = note?.creationTime?.formatDate()
+                lastUpdate.text = root.context.getString(R.string.title_last_update, note?.creationTime?.formatDate())
+                deadLine.text = root.context.getString(R.string.title_deadline, note?.deadline?.formatDateStyle1())
+                status.text = note?.status.toString()
+
+                status.background.setTint(root.context.getColor(note?.status?.color ?: R.color.purple_200))
+
+                val currentTime = System.currentTimeMillis()
+                val deadLine = note?.deadline ?: Constants.INVALID_LONG_VALUE
+
+                val noteDeadLineTag = if (deadLine.formatDateStyle1() == currentTime.formatDateStyle1()) {
+                    "Today".toDeadlineTag()
+                } else if (deadLine < currentTime) {
+                    "Overdue".toDeadlineTag()
+                } else {
+                    "Upcoming".toDeadlineTag()
+                }
+                deadlineTag.text = noteDeadLineTag.title
+                deadlineTag.background.setTint(root.context.getColor(noteDeadLineTag.colorTag))
+                noteLayout.background.setTint(root.context.getColor(noteDeadLineTag.bgColor))
             }
 
         }

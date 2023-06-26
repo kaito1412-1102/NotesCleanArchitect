@@ -33,9 +33,11 @@
         android:contentDescription="@null"
         android:padding="10dp"
         android:src="@drawable/ic_delete"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintTop_toTopOf="@id/toolbar" />
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        tools:visibility="visible" />
 
 
     <ImageView
@@ -46,9 +48,11 @@
         android:contentDescription="@null"
         android:padding="10dp"
         android:src="@drawable/ic_todo"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        app:layout_constraintTop_toTopOf="@id/toolbar" />
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        tools:visibility="visible" />
 
 
     <com.google.android.material.textfield.TextInputLayout

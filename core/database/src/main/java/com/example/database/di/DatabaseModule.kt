@@ -21,6 +21,7 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): NoteDatabase {
         return Room.databaseBuilder(context, NoteDatabase::class.java, NoteDatabase.DATABASE_NAME)
             .addMigrations(NoteMigration.MIGRATION_1_2)
+            .addMigrations(NoteMigration.MIGRATION_2_3)
             .build()
     }
 

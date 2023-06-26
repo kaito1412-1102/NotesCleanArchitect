@@ -7,9 +7,14 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.model.Note
+import com.example.model.Status
+import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentNoteBinding
+import com.example.notescleanarchitecture.extension.formatDateStyle1
 import com.example.notescleanarchitecture.framework.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
+import com.example.notescleanarchitecture.utils.Constants.INVALID_LONG_VALUE
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -17,6 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::inflate) {
     private val viewModel: NoteViewModel by viewModels()
     private var currentNote: Note? = null
+
+    private var datePickerValue: Long = INVALID_LONG_VALUE
+    private var status = Status.TODO
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +38,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
         }
         initView()
         actionButton()
+        Log.d(TAG, "onViewCreated: ${Status.TODO}")
     }
 
     private fun initView() {
@@ -38,6 +47,14 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                 edtTitle.text = Editable.Factory.getInstance().newEditable(note.title)
                 edtContent.text = Editable.Factory.getInstance().newEditable(note.content)
                 buttonDelete.visibility = View.VISIBLE
+                status = note.status
+                if (status == Status.TODO) {
+                    buttonTodo.setImageResource(R.drawable.ic_todo)
+                } else {
+                    buttonTodo.setImageResource(R.drawable.ic_done)
+                }
+                buttonTodo.visibility = View.VISIBLE
+                tvDeadline.text = note.deadline.formatDateStyle1()
             }
         }
     }
@@ -47,8 +64,14 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
             buttonCheck.setOnClickListener {
                 val title = edtTitle.text.toString()
                 val content = edtContent.text.toString()
-                val deadLine =
-               /* if (title.isNotEmpty() && content.isNotEmpty()) {
+                if (title.isEmpty() || content.isEmpty() || datePickerValue == INVALID_LONG_VALUE) {
+                    showAlert(
+                        title = "Add note error!",
+                        message = "Please fill title, content and choose deadline for this note!",
+                        positiveButtonText = "OK",
+                    )
+                    return@setOnClickListener
+                }
                     val currentTime = System.currentTimeMillis()
                     val creationTime = currentNote?.creationTime ?: currentTime
                     val idNote = currentNote?.id ?: 0
@@ -58,11 +81,12 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                             title = title,
                             content = content,
                             creationTime = creationTime,
-                            updateTime = currentTime
+                            updateTime = currentTime,
+                            deadline =  datePickerValue,
+                            status = status,
                         )
                     )
-                }*/
-                navController.popBackStack()
+                    navController.popBackStack()
             }
 
             buttonDelete.setOnClickListener {
@@ -79,7 +103,50 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                     )
                 }
             }
+
+            buttonCalendar.setOnClickListener {
+                val datePicker =
+                    MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select date")
+                        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                        .build()
+                datePicker.addOnPositiveButtonClickListener {
+                    Log.d(TAG, "actionButton: $it")
+                    if (validateDate(it)) {
+                        datePickerValue = it
+                        binding.tvDeadline.text = it.formatDateStyle1()
+                    }
+                }
+                datePicker.show(requireActivity().supportFragmentManager, null)
+            }
+
+            buttonTodo.setOnClickListener {
+                when (status) {
+                    Status.TODO -> {
+                        status = Status.DONE
+                        binding.buttonTodo.setImageResource(R.drawable.ic_done)
+                    }
+
+                    else -> {
+                        status = Status.TODO
+                        binding.buttonTodo.setImageResource(R.drawable.ic_todo)
+                    }
+                }
+            }
         }
+    }
+
+    private fun validateDate(it: Long?): Boolean {
+        val currentDate = System.currentTimeMillis()
+        if ((it ?: INVALID_LONG_VALUE) <= currentDate) {
+            showAlert(
+                title = "Date Invalid!",
+                message = "Please select a date > ${currentDate.formatDateStyle1()}",
+                positiveButtonText = "OK",
+            )
+            return false
+        }
+        return true
     }
 
     companion object {

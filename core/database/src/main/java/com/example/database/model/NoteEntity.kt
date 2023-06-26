@@ -3,9 +3,8 @@ package com.example.database.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.model.DeadlineTag
 import com.example.model.Note
-import com.example.model.Status
+import com.example.model.toStatus
 
 @Entity(tableName = "note")
 data class NoteEntity(
@@ -24,9 +23,6 @@ data class NoteEntity(
     @ColumnInfo(name = "deadline_time")
     val deadline: Long,
 
-    @ColumnInfo(name = "deadline_tag")
-    val deadlineTag: String,
-
     @ColumnInfo(name = "status")
     val status: String,
 ) {
@@ -38,8 +34,7 @@ data class NoteEntity(
             creationTime = note.creationTime,
             updateTime = note.updateTime,
             deadline = note.deadline,
-            deadlineTag = DeadlineTag.TODAY.toString(),
-            status = Status.DONE.toString()
+            status = note.status.toString()
         )
 
     }
@@ -51,8 +46,6 @@ data class NoteEntity(
         creationTime = creationTime,
         updateTime = updateTime,
         deadline = deadline,
-        deadlineTag = DeadlineTag.TODAY,
-        status = Status.DONE
+        status = status.toStatus()
     )
-
 }

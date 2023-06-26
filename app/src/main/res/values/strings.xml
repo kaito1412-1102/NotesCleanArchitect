@@ -4,4 +4,6 @@
     <string name="title_detail_note">Detail Note</string>
     <string name="hint_note_title">title</string>
     <string name="hint_note_content">content</string>
+    <string name="title_deadline">Deadline: %s</string>
+    <string name="title_last_update">Last update: %s</string>
 </resources>
