@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NotesCleanArchitecture</string>
     <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_detail_note">Detail Note</string>
+    <string name="hint_note_title">title</string>
+    <string name="hint_note_content">content</string>
 </resources>

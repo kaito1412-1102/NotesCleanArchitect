@@ -3,6 +3,7 @@ package com.example.database.di
 import android.content.Context
 import androidx.room.Room
 import com.example.database.NoteDatabase
+import com.example.database.NoteMigration
 import com.example.database.dao.NoteDao
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): NoteDatabase {
-        return Room.databaseBuilder(context, NoteDatabase::class.java, NoteDatabase.DATABASE_NAME).build()
+        return Room.databaseBuilder(context, NoteDatabase::class.java, NoteDatabase.DATABASE_NAME)
+            .addMigrations(NoteMigration.MIGRATION_1_2)
+            .build()
     }
 
     @Provides

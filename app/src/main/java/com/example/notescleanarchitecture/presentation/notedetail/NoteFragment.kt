@@ -47,7 +47,8 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
             buttonCheck.setOnClickListener {
                 val title = edtTitle.text.toString()
                 val content = edtContent.text.toString()
-                if (title.isNotEmpty() && content.isNotEmpty()) {
+                val deadLine =
+               /* if (title.isNotEmpty() && content.isNotEmpty()) {
                     val currentTime = System.currentTimeMillis()
                     val creationTime = currentNote?.creationTime ?: currentTime
                     val idNote = currentNote?.id ?: 0
@@ -60,7 +61,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                             updateTime = currentTime
                         )
                     )
-                }
+                }*/
                 navController.popBackStack()
             }
 

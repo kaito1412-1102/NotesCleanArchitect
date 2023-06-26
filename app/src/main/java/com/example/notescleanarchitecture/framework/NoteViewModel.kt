@@ -3,11 +3,8 @@ package com.example.notescleanarchitecture.framework
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
 import com.example.domain.NoteUseCase
 import com.example.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +38,7 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
         coroutineScope.launch {
             noteUseCase.getNote.invoke(id).collect { note ->
                 note?.let {
-                    _noteUiState.emit(NoteUiState.GetNoteSuccess(it))
+                    _noteUiState.emit(NoteUiState.GetNoteFromIdSuccess(it))
                 }
             }
         }
@@ -62,6 +59,6 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
     sealed interface NoteUiState {
         object Loading : NoteUiState
         data class GetNotesSuccess(val notes: PagingData<Note>) : NoteUiState
-        data class GetNoteSuccess(val note: Note) : NoteUiState
+        data class GetNoteFromIdSuccess(val note: Note) : NoteUiState
     }
 }

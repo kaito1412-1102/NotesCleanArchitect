@@ -6,20 +6,16 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.paging.map
 import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
 import com.example.notescleanarchitecture.framework.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
+import com.example.notescleanarchitecture.presentation.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
-import com.example.notescleanarchitecture.presentation.collectLifeCycleFlow
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::inflate), NoteAdapter.OnNoteClickListener {
@@ -63,7 +59,7 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
                     Log.d("tuanminh", "collectData: Loading")
                 }
 
-                is NoteViewModel.NoteUiState.GetNoteSuccess -> {}
+                is NoteViewModel.NoteUiState.GetNoteFromIdSuccess -> {}
                 is NoteViewModel.NoteUiState.GetNotesSuccess -> {
                     Log.d("tuanminh", "collectData: success ")
                     binding.swipeRefreshLayout.isRefreshing = false

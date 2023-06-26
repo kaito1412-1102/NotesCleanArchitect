@@ -44,7 +44,7 @@ class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter
             binding.apply {
                 title.text = note?.title
                 content.text = note?.content
-                date.text = note?.creationTime?.formatDate()
+                lastUpdate.text = note?.creationTime?.formatDate()
             }
 
         }
