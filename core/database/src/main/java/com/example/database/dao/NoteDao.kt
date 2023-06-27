@@ -19,6 +19,9 @@ interface NoteDao {
     @Query("SELECT * FROM note")
     fun getAllNoteEntity(): PagingSource<Int, NoteEntity>
 
+    @Query("SELECT * FROM note WHERE title LIKE '%' || :title || '%'")
+    fun searchNoteTitle(title: String): PagingSource<Int, NoteEntity>
+
     @Delete
     suspend fun deleteNoteEntity(noteEntity: NoteEntity)
 }

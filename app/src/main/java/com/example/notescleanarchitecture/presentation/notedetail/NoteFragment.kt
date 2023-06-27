@@ -11,7 +11,7 @@ import com.example.model.Status
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentNoteBinding
 import com.example.notescleanarchitecture.extension.formatDateStyle1
-import com.example.notescleanarchitecture.framework.NoteViewModel
+import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.utils.Constants.INVALID_LONG_VALUE
 import com.google.android.material.datepicker.MaterialDatePicker

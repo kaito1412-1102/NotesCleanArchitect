@@ -36,8 +36,6 @@ L
 core/data/proguard-rules.pro,5\a\5a77cd0bc7ff80f7c8cd56ccaa9f7ad6fec0423b
 N
 core/domain/proguard-rules.pro,4\1\4173dae43cafa5b4acad2f77c16f205292a24fc2
-q
-Acore/domain/src/main/java/com/example/domain/RemoveNoteUseCase.kt,7\9\796f2e49a12866d457b1fcdeba347a98713ce959
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 H
@@ -52,23 +50,23 @@ s
 Ccore/database/src/test/java/com/example/database/ExampleUnitTest.kt,f\8\f84c6e3dbd2a118b05a913e1fa0a56ad152fdffb
 P
  core/database/proguard-rules.pro,2\e\2e9660545da35c546447e7df6e72a7dadd74cade
-n
->core/domain/src/main/java/com/example/domain/AddNoteUseCase.kt,d\b\db693c9efdb8d22eff77cdc096863f6798429792
 
 Qapp/src/main/java/com/example/notescleanarchitecture/presentation/MainActivity.kt,c\6\c675d9b510d25a358b9b863cdf3db79419c17bd0
-E
-core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
-i
-9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
-q
-Acore/domain/src/main/java/com/example/domain/GetAllNoteUseCase.kt,8\f\8f8d61741906d408131b952661b84213ca519145
 L
 core/domain/build.gradle.kts,f\6\f6899d750c55b14a51220f253d74a5cc3ad0be8b
-k
-;core/domain/src/main/java/com/example/domain/NoteUseCase.kt,e\7\e727a6f3c8d3b1a9947cc4bcdd4382955c5d9bab
-n
->core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
+Y
+)core/model/src/main/res/values/colors.xml,c\a\caccd40756aa251c32c1ed35eadb63b415a8f0ac
+w
+Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
 u
-Ecore/data/src/main/java/com/example/data/repository/NoteRepository.kt,2\5\254f020d75d7409cabc01edce116637afeb25f75
-o
-?core/database/src/main/java/com/example/database/dao/NoteDao.kt,e\f\efb1cecc88841cc8871ceb07dfcdff936962432e
+Ecore/database/src/main/java/com/example/database/di/DatabaseModule.kt,3\6\36c12ddfc3f80e9855ff0626e939f10a0fcfe8d4
+b
+2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
+p
+@core/database/src/main/java/com/example/database/NoteDatabase.kt,5\f\5f7740087985630f7f8b7b0302ae5479ba0a12d8
+q
+Acore/database/src/main/java/com/example/database/NoteMigration.kt,f\9\f90494d7debba4f9f8cabbd0698f680082632b2d
+{
+Kapp/src/main/java/com/example/notescleanarchitecture/extension/StringExt.kt,9\9\99153cf66967db90e93b96b18a97fc504e01e2cb
+t
+Dcore/database/src/main/java/com/example/database/model/NoteEntity.kt,2\a\2ae649fee1969f62ebcd10877e8f46841e5ed348

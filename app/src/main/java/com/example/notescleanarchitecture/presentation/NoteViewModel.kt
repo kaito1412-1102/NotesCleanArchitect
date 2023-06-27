@@ -1,6 +1,8 @@
-package com.example.notescleanarchitecture.framework
+package com.example.notescleanarchitecture.presentation
 
 import android.util.Log
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -10,7 +12,9 @@ import com.example.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,8 +23,8 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : ViewModel() {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    private val _noteUiState: MutableStateFlow<NoteUiState> = MutableStateFlow(NoteUiState.Loading)
-    val noteUiState = _noteUiState.asStateFlow()
+    private val _noteUiState: MutableSharedFlow<NoteUiState> = MutableSharedFlow()
+    val noteUiState = _noteUiState.asSharedFlow()
 
     fun addNote(note: Note) {
         coroutineScope.launch {
@@ -44,6 +48,17 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
         }
     }
 
+    fun searchNotes(title: String) {
+        coroutineScope.launch {
+            _noteUiState.emit(NoteUiState.Loading)
+            noteUseCase.searchNote.invoke(title).cachedIn(viewModelScope).collect {
+                _noteUiState.emit(
+                    NoteUiState.SearchNotesSuccess(it)
+                )
+            }
+        }
+    }
+
     fun getAllNotes() {
         Log.d("tuanminh", "getAllNotes: ")
         coroutineScope.launch {
@@ -59,6 +74,7 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
     sealed interface NoteUiState {
         object Loading : NoteUiState
         data class GetNotesSuccess(val notes: PagingData<Note>) : NoteUiState
+        data class SearchNotesSuccess(val notes: PagingData<Note>) : NoteUiState
         data class GetNoteFromIdSuccess(val note: Note) : NoteUiState
     }
 }

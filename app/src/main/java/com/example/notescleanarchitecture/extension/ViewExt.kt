@@ -1,4 +1,4 @@
-package com.example.notescleanarchitecture.presentation
+package com.example.notescleanarchitecture.extension
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

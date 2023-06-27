@@ -6,13 +6,14 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
-import com.example.notescleanarchitecture.framework.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
-import com.example.notescleanarchitecture.presentation.collectLifeCycleFlow
+import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
+import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,9 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         binding.buttonTest.setOnClickListener {
             Log.d("tuanminh", "collectData: ${noteAdapter.snapshot().items.size}")
         }
+        binding.buttonSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_list_to_search)
+        }
     }
 
     private fun initView() {
@@ -59,12 +63,15 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
                     Log.d("tuanminh", "collectData: Loading")
                 }
 
-                is NoteViewModel.NoteUiState.GetNoteFromIdSuccess -> {}
                 is NoteViewModel.NoteUiState.GetNotesSuccess -> {
                     Log.d("tuanminh", "collectData: success ")
                     binding.swipeRefreshLayout.isRefreshing = false
                     noteAdapter.submitData(it.notes)
+                    Log.d("tuanminh", "collectData: success ${noteAdapter.snapshot().items.size}")
+                    binding.tvCount.text = noteAdapter.snapshot().items.size.toString()
                 }
+
+                else -> {}
             }
         })
         collectLifeCycleFlow(noteAdapter.loadStateFlow) {
@@ -77,13 +84,12 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         }
     }
 
-    private fun goToDetails(id: Long = 0L) {
+    private fun goToDetails() {
         navController.navigate(R.id.action_list_to_note)
     }
 
     override fun onNoteItemClick(note: Note) {
         val bundle = bundleOf(ARG_NOTE to note)
         navController.navigate(R.id.action_list_to_note, bundle)
-
     }
 }

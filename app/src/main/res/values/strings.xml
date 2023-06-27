@@ -6,4 +6,6 @@
     <string name="hint_note_content">content</string>
     <string name="title_deadline">Deadline: %s</string>
     <string name="title_last_update">Last update: %s</string>
+    <string name="title_memory_notes">Memory Notes</string>
+    <string name="title_search_note">Search note</string>
 </resources>

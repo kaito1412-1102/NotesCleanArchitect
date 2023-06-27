@@ -51,7 +51,7 @@ class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter
             binding.apply {
                 title.text = note?.title
                 content.text = note?.content
-                lastUpdate.text = root.context.getString(R.string.title_last_update, note?.creationTime?.formatDate())
+                lastUpdate.text = root.context.getString(R.string.title_last_update, note?.creationTime?.formatDateStyle1())
                 deadLine.text = root.context.getString(R.string.title_deadline, note?.deadline?.formatDateStyle1())
                 status.text = note?.status.toString()
 
