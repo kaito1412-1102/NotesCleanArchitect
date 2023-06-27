@@ -16,11 +16,11 @@ interface NoteDao {
     @Query("SELECT * FROM note WHERE id =:id")
     suspend fun getNoteEntity(id: Long): NoteEntity?
 
-    @Query("SELECT * FROM note")
+    @Query("SELECT * FROM note ORDER BY (CASE WHEN date(deadline_time / 1000, 'unixepoch') = date('now') THEN 0 ELSE 1 END), date(deadline_time / 1000, 'unixepoch') DESC")
     fun getAllNoteEntity(): PagingSource<Int, NoteEntity>
 
-    @Query("SELECT * FROM note WHERE title LIKE '%' || :title || '%'")
-    fun searchNoteTitle(title: String): PagingSource<Int, NoteEntity>
+    @Query("SELECT * FROM note WHERE title LIKE '%' || :input || '%' OR status LIKE '%' || :input || '%' ")
+    fun searchNoteTitle(input: String): PagingSource<Int, NoteEntity>
 
     @Delete
     suspend fun deleteNoteEntity(noteEntity: NoteEntity)

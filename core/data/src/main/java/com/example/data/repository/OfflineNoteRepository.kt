@@ -37,14 +37,14 @@ class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : 
         }
     }
 
-    override fun searchNoteTitle(title: String): Flow<PagingData<Note>> = Pager(
+    override fun searchNote(input: String): Flow<PagingData<Note>> = Pager(
         config = PagingConfig(
             pageSize = 10,
             enablePlaceholders = false,
             prefetchDistance = 1,
             initialLoadSize = 10
         ),
-        pagingSourceFactory = { noteDao.searchNoteTitle(title) }
+        pagingSourceFactory = { noteDao.searchNoteTitle(input) }
     ).flow.map { pagingData ->
         pagingData.map {
             it.toNote()

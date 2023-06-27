@@ -48,10 +48,10 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase) : 
         }
     }
 
-    fun searchNotes(title: String) {
+    fun searchNotes(input: String) {
         coroutineScope.launch {
             _noteUiState.emit(NoteUiState.Loading)
-            noteUseCase.searchNote.invoke(title).cachedIn(viewModelScope).collect {
+            noteUseCase.searchNote.invoke(input).cachedIn(viewModelScope).collect {
                 _noteUiState.emit(
                     NoteUiState.SearchNotesSuccess(it)
                 )

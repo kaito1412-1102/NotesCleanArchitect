@@ -56,8 +56,6 @@ L
 core/domain/build.gradle.kts,f\6\f6899d750c55b14a51220f253d74a5cc3ad0be8b
 Y
 )core/model/src/main/res/values/colors.xml,c\a\caccd40756aa251c32c1ed35eadb63b415a8f0ac
-b
-2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
 w
 Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
 q
@@ -68,5 +66,21 @@ u
 Ecore/database/src/main/java/com/example/database/di/DatabaseModule.kt,3\6\36c12ddfc3f80e9855ff0626e939f10a0fcfe8d4
 p
 @core/database/src/main/java/com/example/database/NoteDatabase.kt,5\f\5f7740087985630f7f8b7b0302ae5479ba0a12d8
-t
-Dcore/database/src/main/java/com/example/database/model/NoteEntity.kt,2\a\2ae649fee1969f62ebcd10877e8f46841e5ed348
+E
+core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
+
+Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
+n
+>core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
+q
+Acore/domain/src/main/java/com/example/domain/GetAllNoteUseCase.kt,8\f\8f8d61741906d408131b952661b84213ca519145
+n
+>core/domain/src/main/java/com/example/domain/AddNoteUseCase.kt,d\b\db693c9efdb8d22eff77cdc096863f6798429792
+q
+Acore/domain/src/main/java/com/example/domain/RemoveNoteUseCase.kt,7\9\796f2e49a12866d457b1fcdeba347a98713ce959
+i
+9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
+y
+Iapp/src/main/java/com/example/notescleanarchitecture/extension/ViewExt.kt,1\9\194d8c0967a9e970d1f06f4a38cdae4c5d553fac
+I
+gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f

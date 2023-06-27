@@ -10,6 +10,7 @@ import com.example.model.Note
 import com.example.model.Status
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentNoteBinding
+import com.example.notescleanarchitecture.extension.formatDate
 import com.example.notescleanarchitecture.extension.formatDateStyle1
 import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
@@ -23,7 +24,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
     private val viewModel: NoteViewModel by viewModels()
     private var currentNote: Note? = null
 
-    private var datePickerValue: Long = INVALID_LONG_VALUE
+    private var datePickerValue: Long = System.currentTimeMillis()
     private var status = Status.TODO
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,9 +55,10 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                     buttonTodo.setImageResource(R.drawable.ic_done)
                 }
                 buttonTodo.visibility = View.VISIBLE
-                tvDeadline.text = note.deadline.formatDateStyle1()
+                datePickerValue = note.deadline
             }
         }
+        binding.tvDeadline.text = requireContext().getString(R.string.title_deadline, datePickerValue.formatDateStyle1())
     }
 
     private fun actionButton() {
@@ -64,7 +66,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
             buttonCheck.setOnClickListener {
                 val title = edtTitle.text.toString()
                 val content = edtContent.text.toString()
-                if (title.isEmpty() || content.isEmpty() || datePickerValue == INVALID_LONG_VALUE) {
+                if (title.isEmpty() || content.isEmpty()) {
                     showAlert(
                         title = "Add note error!",
                         message = "Please fill title, content and choose deadline for this note!",
@@ -111,7 +113,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                         .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                         .build()
                 datePicker.addOnPositiveButtonClickListener {
-                    Log.d(TAG, "actionButton: $it")
+                    Log.d(TAG, "actionButton: $it - ${it.formatDate()}")
                     if (validateDate(it)) {
                         datePickerValue = it
                         binding.tvDeadline.text = it.formatDateStyle1()
