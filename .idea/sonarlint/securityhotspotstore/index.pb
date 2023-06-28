@@ -16,8 +16,6 @@ N
 core/domain/consumer-rules.pro,2\3\23ea16b140735dea0363d183f0e9bfe5e84fef9e
 ~
 Ncore/domain/src/androidTest/java/com/example/domain/ExampleInstrumentedTest.kt,a\e\aefa536d0db1ffbae76b1d38a8a5a1aadf0e8ae1
-?
-settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 o
 ?core/domain/src/test/java/com/example/domain/ExampleUnitTest.kt,9\e\9e8adfe8197083080df62ccd1a9135de20fdd451
 X
@@ -66,22 +64,14 @@ p
 @core/database/src/main/java/com/example/database/NoteDatabase.kt,5\f\5f7740087985630f7f8b7b0302ae5479ba0a12d8
 E
 core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
-
-Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
 n
 >core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
 n
 >core/domain/src/main/java/com/example/domain/AddNoteUseCase.kt,d\b\db693c9efdb8d22eff77cdc096863f6798429792
 i
 9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
-I
-gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
-b
-2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
 D
 app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
-t
-Dcore/database/src/main/java/com/example/database/model/NoteEntity.kt,2\a\2ae649fee1969f62ebcd10877e8f46841e5ed348
 Œ
 \app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteFragment.kt,1\5\15b12534aa83df9fa12062c8732199fb9532bd1b
 k

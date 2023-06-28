@@ -15,6 +15,7 @@ androidxNavigarion = "2.5.3"
 androidxRoom = "2.5.0"
 parcelize = "1.8.21"
 androidxPaging = "3.1.1"
+androidxDataStore = "1.0.0"
 
 junit4 = "4.13.2"
 androidxTestExt = "1.1.5"
@@ -44,6 +45,8 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidxPaging" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version = "androidxDataStore" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore", version = "androidxDataStore" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }

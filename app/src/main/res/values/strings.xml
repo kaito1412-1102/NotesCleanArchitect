@@ -9,4 +9,17 @@
     <string name="title_memory_notes">Memory Notes</string>
     <string name="title_search_note">Search note</string>
     <string name="msg_no_notes_found">No notes found</string>
+    <string name="deadline_tag_all_type">All type</string>
+    <string name="deadline_tag_today_type">Today</string>
+    <string name="deadline_tag_upcoming_type">Upcoming</string>
+    <string name="deadline_tag_overdue_type">Overdue</string>
+
+    <string name="title_deadline_tag">Deadline tag</string>
+    <string name="title_status">Status</string>
+    <string name="status_all_type">All type</string>
+    <string name="status_todo_type">Todo</string>
+    <string name="status_done_type">Done</string>
+
+    <string name="title_apply">Apply</string>
+    <string name="title_cancel">Cancel</string>
 </resources>
