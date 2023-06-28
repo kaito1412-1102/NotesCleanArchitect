@@ -1,11 +1,12 @@
 package com.example.notescleanarchitecture.presentation.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView.OnQueryTextListener
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentSearchBinding
@@ -27,7 +28,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    viewModel.searchNotes(it)
+                    collectLifeCycleFlow(flow = viewModel.searchNotes(it), collector = { notes ->
+                        noteAdapter.submitData(notes)
+                    })
                 }
                 return true
             }
@@ -37,26 +40,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
         })
         binding.rvNotes.adapter = noteAdapter
+        binding.swipeRefreshLayout.isEnabled = false
         collectData()
-        binding.buttonTest.setOnClickListener {
-            Log.d("tuanminh", "collectData: success ${noteAdapter.snapshot().items.size}")
-        }
     }
 
     private fun collectData() {
-        collectLifeCycleFlow(flow = viewModel.noteUiState, collector = {
-            when (it) {
-                NoteViewModel.NoteUiState.Loading ->{
-                    binding.swipeRefreshLayout.isRefreshing = true
-                }
-                is NoteViewModel.NoteUiState.SearchNotesSuccess -> {
-                    binding.swipeRefreshLayout.isRefreshing = false
-                    noteAdapter.submitData(it.notes)
-                }
-
-                else -> {}
+        collectLifeCycleFlow(noteAdapter.loadStateFlow) {
+            if (it.refresh is LoadState.NotLoading) {
+                binding.tvMsgNotFound.isVisible = noteAdapter.itemCount == 0
+                binding.swipeRefreshLayout.isRefreshing = false
             }
-        })
+            if (it.refresh is LoadState.Loading) {
+                binding.swipeRefreshLayout.isRefreshing = true
+            }
+            binding.progressBar.isVisible = it.source.append is LoadState.Loading
+        }
     }
 
     override fun onNoteItemClick(note: Note) {

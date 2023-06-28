@@ -5,14 +5,14 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
+import com.example.notescleanarchitecture.extension.asCollectFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
-import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
@@ -21,16 +21,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::inflate), NoteAdapter.OnNoteClickListener {
 
-    private val viewModel: NoteViewModel by activityViewModels()
+    private val viewModel: NoteViewModel by viewModels()
     private var noteAdapter = NoteAdapter(this)
-
-    private var isInit = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         actionButton()
-        Log.d("tuanminh", "onViewCreated: ")
         collectData()
     }
 
@@ -40,9 +37,6 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
             noteAdapter.refresh()
-        }
-        binding.buttonTest.setOnClickListener {
-            Log.d("tuanminh", "collectData: ${noteAdapter.snapshot().items.size}")
         }
         binding.buttonSearch.setOnClickListener {
             findNavController().navigate(R.id.action_list_to_search)
@@ -56,31 +50,20 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
     }
 
     private fun collectData() {
-        collectLifeCycleFlow(flow = viewModel.noteUiState, collector = {
-            when (it) {
-                NoteViewModel.NoteUiState.Loading -> {
-                    binding.swipeRefreshLayout.isRefreshing = true
-                    Log.d("tuanminh", "collectData: Loading")
-                }
-
-                is NoteViewModel.NoteUiState.GetNotesSuccess -> {
-                    Log.d("tuanminh", "collectData: success ")
-                    binding.swipeRefreshLayout.isRefreshing = false
-                    noteAdapter.submitData(it.notes)
-                    Log.d("tuanminh", "collectData: success ${noteAdapter.snapshot().items.size}")
-                    binding.tvCount.text = noteAdapter.snapshot().items.size.toString()
-                }
-
-                else -> {}
-            }
+        asCollectFlow(flow = viewModel.getAllNotes(), collector = {
+            noteAdapter.submitData(it)
         })
-        collectLifeCycleFlow(noteAdapter.loadStateFlow) {
-            Log.d("tuanminh", "collectData: loading")
+
+        asCollectFlow(noteAdapter.loadStateFlow) {
+            Log.d("tuanminh", "collectData: loading:${noteAdapter.itemCount} - ${it.append} - ${it.refresh} -${it.source}")
+           /* if (noteAdapter.itemCount <= PAGE_SIZE) {
+                binding.rvNotes.scrollToPosition(0)
+            }*/
+            if (it.append is LoadState.NotLoading) {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+            binding.tvCount.text = noteAdapter.itemCount.toString()
             binding.progressBar.isVisible = it.source.append is LoadState.Loading
-        }
-        if (!isInit) {
-            viewModel.getAllNotes()
-            isInit = true
         }
     }
 

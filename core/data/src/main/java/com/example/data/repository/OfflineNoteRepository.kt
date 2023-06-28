@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.example.database.NoteDatabase
+import com.example.data.ultils.Constants.PAGE_SIZE
 import com.example.database.dao.NoteDao
 import com.example.database.model.NoteEntity
 import com.example.model.Note
@@ -28,7 +28,7 @@ class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : 
             pageSize = 10,
             enablePlaceholders = false,
             prefetchDistance = 1,
-            initialLoadSize = 10
+            initialLoadSize = PAGE_SIZE
         ),
         pagingSourceFactory = { noteDao.getAllNoteEntity() }
     ).flow.map { pagingData ->
@@ -42,7 +42,7 @@ class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : 
             pageSize = 10,
             enablePlaceholders = false,
             prefetchDistance = 1,
-            initialLoadSize = 10
+            initialLoadSize = PAGE_SIZE
         ),
         pagingSourceFactory = { noteDao.searchNoteTitle(input) }
     ).flow.map { pagingData ->
@@ -50,12 +50,6 @@ class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : 
             it.toNote()
         }
     }
-
-    private val pagingConfig = PagingConfig(
-        pageSize = 10,
-        initialLoadSize = 10,
-        enablePlaceholders = false
-    )
 
     override suspend fun remove(note: Note) {
         return noteDao.deleteNoteEntity(NoteEntity.fromNote(note))

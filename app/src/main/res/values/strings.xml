@@ -8,4 +8,5 @@
     <string name="title_last_update">Last update: %s</string>
     <string name="title_memory_notes">Memory Notes</string>
     <string name="title_search_note">Search note</string>
+    <string name="msg_no_notes_found">No notes found</string>
 </resources>
