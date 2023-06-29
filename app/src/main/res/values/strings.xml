@@ -22,4 +22,7 @@
 
     <string name="title_apply">Apply</string>
     <string name="title_cancel">Cancel</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">Ok</string>
+    <string name="apply_button">Apply</string>
 </resources>

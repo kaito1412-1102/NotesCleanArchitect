@@ -48,8 +48,6 @@ s
 Ccore/database/src/test/java/com/example/database/ExampleUnitTest.kt,f\8\f84c6e3dbd2a118b05a913e1fa0a56ad152fdffb
 P
  core/database/proguard-rules.pro,2\e\2e9660545da35c546447e7df6e72a7dadd74cade
-Å
-Qapp/src/main/java/com/example/notescleanarchitecture/presentation/MainActivity.kt,c\6\c675d9b510d25a358b9b863cdf3db79419c17bd0
 L
 core/domain/build.gradle.kts,f\6\f6899d750c55b14a51220f253d74a5cc3ad0be8b
 Y
@@ -62,14 +60,10 @@ q
 Acore/database/src/main/java/com/example/database/NoteMigration.kt,f\9\f90494d7debba4f9f8cabbd0698f680082632b2d
 {
 Kapp/src/main/java/com/example/notescleanarchitecture/extension/StringExt.kt,9\9\99153cf66967db90e93b96b18a97fc504e01e2cb
-i
-9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
 å
 \app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteFragment.kt,1\5\15b12534aa83df9fa12062c8732199fb9532bd1b
 o
 ?core/database/src/main/java/com/example/database/dao/NoteDao.kt,e\f\efb1cecc88841cc8871ceb07dfcdff936962432e
-w
-Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
 ã
 [app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteAdapter.kt,b\b\bbed918bbe1c1ff731c13e58f0706d11f8933d0d
 q
@@ -78,8 +72,6 @@ q
 Acore/domain/src/main/java/com/example/domain/SearchNoteUseCase.kt,1\2\1204da474e261a4b262e5c366f241d0554cab881
 l
 <core/data/src/main/java/com/example/data/ultils/Constants.kt,b\f\bf9bda6a6772af5a5f7bde85e014b2f758cb37dc
-y
-Iapp/src/main/java/com/example/notescleanarchitecture/extension/ViewExt.kt,1\9\194d8c0967a9e970d1f06f4a38cdae4c5d553fac
 ä
 Zapp/src/main/java/com/example/notescleanarchitecture/presentation/search/SearchFragment.kt,3\d\3dd8ed83f57bfd973995785ba9840a9a7b09872d
 t
@@ -96,8 +88,6 @@ u
 Ecore/datastore/src/test/java/com/example/datastore/ExampleUnitTest.kt,5\9\5925d2bab53ddf60939e63422a189595e579b16a
 Q
 !core/datastore/proguard-rules.pro,0\5\05b0b752688427662ffa3dc7531e5efe8997bbfe
-E
-core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
 @
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 q
@@ -112,3 +102,31 @@ n
 >core/domain/src/main/java/com/example/domain/GetNoteUseCase.kt,8\6\86881d2523459a242dec5a7e4852ab0fafa51689
 N
 core/database/build.gradle.kts,c\9\c93dae2df05c386dfd2cb93bc9836d73b1efcb4b
+D
+app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
+O
+core/datastore/build.gradle.kts,3\3\331bf18c57f9a94b61c8cf3c554f2643e12df0e6
+x
+Hcore/datastore/src/main/java/com/example/datastore/di/DataStoreModule.kt,9\4\94e9a9667b566beea84e4755b7cdb4eaff687061
+I
+gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
+è
+_core/datastore/src/main/proto/com/example/notescleanarchitecture/notes_filter_preferences.proto,0\a\0a3c37e880f4a201b550be300d04f86634161a63
+Ä
+Pcore/datastore/src/main/java/com/example/datastore/NotesPreferencesSerializer.kt,8\5\857f424393738cbe489e5003fcac1bae0c68847e
+Å
+Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
+b
+2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
+é
+^app/src/main/java/com/example/notescleanarchitecture/presentation/notelist/NoteListFragment.kt,8\b\8bc4dc178357b95d3d014f54e2b98b65c311b728
+w
+Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
+E
+core/build.gradle.kts,d\7\d72846b7b418aa17de692d1ccf924c738cf8dbe5
+J
+core/data/build.gradle.kts,f\4\f4478630ebacf5eb78d8fddbf2b884e78aef0d50
+i
+9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
+Å
+Qapp/src/main/java/com/example/notescleanarchitecture/presentation/MainActivity.kt,c\6\c675d9b510d25a358b9b863cdf3db79419c17bd0

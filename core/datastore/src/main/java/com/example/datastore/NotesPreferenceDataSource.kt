@@ -1,5 +1,6 @@
 package com.example.datastore
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import com.example.model.DeadlineTagFilter
 import com.example.model.NotesFilterSettings
