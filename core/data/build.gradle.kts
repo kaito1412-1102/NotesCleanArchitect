@@ -37,6 +37,7 @@ dependencies {
 
     implementation(project(":core:database"))
     implementation(project(":core:model"))
+    implementation(project(":core:datastore"))
 
     //hilt
     implementation(libs.dagger.hilt.android)

@@ -7,13 +7,20 @@ import androidx.paging.map
 import com.example.data.ultils.Constants.PAGE_SIZE
 import com.example.database.dao.NoteDao
 import com.example.database.model.NoteEntity
+import com.example.datastore.NotesPreferenceDataSource
+import com.example.model.DeadlineTagFilter
 import com.example.model.Note
+import com.example.model.NotesFilterSettings
+import com.example.model.StatusFilter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : NoteRepository {
+class OfflineNoteRepository @Inject constructor(
+    private val noteDao: NoteDao,
+    private val notesPreferenceDataSource: NotesPreferenceDataSource
+) : NoteRepository {
     override suspend fun add(note: Note) {
         noteDao.addNoteEntity(NoteEntity.fromNote(note))
     }
@@ -53,5 +60,12 @@ class OfflineNoteRepository @Inject constructor(private val noteDao: NoteDao) : 
 
     override suspend fun remove(note: Note) {
         return noteDao.deleteNoteEntity(NoteEntity.fromNote(note))
+    }
+
+    override val notesFilterSetting: Flow<NotesFilterSettings>
+        get() = notesPreferenceDataSource.notesFilterSettings
+
+    override suspend fun saveFilter(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter) {
+        notesPreferenceDataSource.saveFilter(deadlineTagFilter, statusFilter)
     }
 }

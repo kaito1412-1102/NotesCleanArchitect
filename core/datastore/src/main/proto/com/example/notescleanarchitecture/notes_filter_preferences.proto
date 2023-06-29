@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.example.notescleanarchitecture";
+option java_multiple_files = true;
+
+message NotesFilterPreferences {
+  string  deadline_tag = 1;
+  string  status = 2;
+  // NEXT AVAILABLE ID: 3
+}

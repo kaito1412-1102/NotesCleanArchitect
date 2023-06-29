@@ -41,6 +41,9 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         binding.buttonSearch.setOnClickListener {
             findNavController().navigate(R.id.action_list_to_search)
         }
+        binding.buttonFilter.setOnClickListener {
+            findNavController().navigate(R.id.action_list_to_filter)
+        }
     }
 
     private fun initView() {
@@ -56,9 +59,9 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
 
         asCollectFlow(noteAdapter.loadStateFlow) {
             Log.d("tuanminh", "collectData: loading:${noteAdapter.itemCount} - ${it.append} - ${it.refresh} -${it.source}")
-           /* if (noteAdapter.itemCount <= PAGE_SIZE) {
-                binding.rvNotes.scrollToPosition(0)
-            }*/
+            /* if (noteAdapter.itemCount <= PAGE_SIZE) {
+                 binding.rvNotes.scrollToPosition(0)
+             }*/
             if (it.append is LoadState.NotLoading) {
                 binding.swipeRefreshLayout.isRefreshing = false
             }

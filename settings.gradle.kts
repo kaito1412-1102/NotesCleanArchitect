@@ -12,11 +12,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "NotesCleanArchitecture"
-include ':app'
-include ':core'
-include ':core:database'
-include ':core:model'
-include ':core:data'
-include ':core:domain'
-include ':core:datastore'
+include (":app")
+include (":core")
+include (":core:database")
+include (":core:model")
+include (":core:data")
+include (":core:domain")
+include (":core:datastore")
