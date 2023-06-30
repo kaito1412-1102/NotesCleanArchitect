@@ -89,6 +89,7 @@ class NoteFilterFragment : BaseFragment<FragmentNoteFilterBinding>(FragmentNoteF
             }
 
         }
+        viewModel.getFilterSettings()
     }
 
     private fun updateStatusAndDeadlineTagUi() {

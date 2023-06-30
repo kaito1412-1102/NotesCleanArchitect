@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.model.Note
@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::inflate), NoteAdapter.OnNoteClickListener {
 
-    private val viewModel: NoteViewModel by viewModels()
+    private val viewModel: NoteViewModel by activityViewModels()
     private var noteAdapter = NoteAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,21 +53,27 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
     }
 
     private fun collectData() {
-        asCollectFlow(flow = viewModel.getAllNotes(), collector = {
-            noteAdapter.submitData(it)
+        asCollectFlow(flow = viewModel.uiState, collector = {
+            when(it){
+                NoteViewModel.NoteUiState.FilterSettingsApply -> collectNotes()
+            }
         })
 
         asCollectFlow(noteAdapter.loadStateFlow) {
             Log.d("tuanminh", "collectData: loading:${noteAdapter.itemCount} - ${it.append} - ${it.refresh} -${it.source}")
-            /* if (noteAdapter.itemCount <= PAGE_SIZE) {
-                 binding.rvNotes.scrollToPosition(0)
-             }*/
             if (it.append is LoadState.NotLoading) {
                 binding.swipeRefreshLayout.isRefreshing = false
             }
             binding.tvCount.text = noteAdapter.itemCount.toString()
             binding.progressBar.isVisible = it.source.append is LoadState.Loading
         }
+        viewModel.init()
+    }
+
+    private fun collectNotes() {
+        asCollectFlow(flow = viewModel.getAllNotes(), collector = {
+            noteAdapter.submitData(it)
+        })
     }
 
     private fun goToDetails() {

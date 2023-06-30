@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface NoteRepository {
     suspend fun add(note: Note)
     fun get(id: Long): Flow<Note?>
-    fun getAll(): Flow<PagingData<Note>>
+    fun getAll(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): Flow<PagingData<Note>>
     fun searchNote(input: String): Flow<PagingData<Note>>
     suspend fun remove(note: Note)
 

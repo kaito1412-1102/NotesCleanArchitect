@@ -1,8 +1,5 @@
 package com.example.notescleanarchitecture.presentation.notedetail
 
-import android.R.color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -12,27 +9,15 @@ import com.example.model.Note
 import com.example.model.toDeadlineTag
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.ItemNoteBinding
-import com.example.notescleanarchitecture.extension.formatDate
 import com.example.notescleanarchitecture.extension.formatDateStyle1
 import com.example.notescleanarchitecture.utils.Constants
 
 
 class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter<Note, NoteAdapter.NoteViewHolder>(DataComparator) {
-//    private val listNote = mutableListOf<Note>()
-//
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun setListNotes(notes: List<Note>) {
-//        Log.d(TAG, "setListNotes: $notes")
-//        listNote.clear()
-//        listNote.addAll(notes)
-//        notifyDataSetChanged()
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
-
-//    override fun getItemCount(): Int = listNote.size
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -87,9 +72,5 @@ class NoteAdapter(private val listener: OnNoteClickListener) : PagingDataAdapter
 
     fun interface OnNoteClickListener {
         fun onNoteItemClick(note: Note)
-    }
-
-    companion object {
-        const val TAG = "NoteAdapter"
     }
 }
