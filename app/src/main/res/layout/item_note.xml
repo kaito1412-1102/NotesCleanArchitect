@@ -4,6 +4,8 @@
     android:id="@+id/noteLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="10dp"
     android:orientation="vertical"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp"
@@ -52,21 +54,22 @@
             app:layout_constraintTop_toBottomOf="@id/deadLine"
             tools:text="Last updated" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/deadlineTag"
+            style="@style/Detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_corner20_red"
             android:paddingHorizontal="5dp"
             android:paddingVertical="3dp"
-            style="@style/Detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lastUpdate"
             tools:text="Today" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/status"
+            style="@style/Detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -74,7 +77,6 @@
             android:background="@drawable/bg_corner20_red"
             android:paddingHorizontal="5dp"
             android:paddingVertical="3dp"
-            style="@style/Detail"
             app:layout_constraintStart_toEndOf="@id/deadlineTag"
             app:layout_constraintTop_toBottomOf="@id/lastUpdate"
             tools:text="done" />

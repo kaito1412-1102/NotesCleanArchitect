@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.repository.NoteRepository
 import com.example.model.DeadlineTagFilter
-import com.example.model.NotesFilterSettings
 import com.example.model.StatusFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,14 +17,12 @@ class NoteFilterViewModel @Inject constructor(
     private val noteRepository: NoteRepository,
 ) : ViewModel() {
 
-    private var noteFilterSettings: NotesFilterSettings? = null
     private var _uiState = MutableSharedFlow<NoteFilterUiState>()
     val uiState = _uiState.asSharedFlow()
 
-    init {
+    fun getFilterSettings(){
         viewModelScope.launch {
             noteRepository.notesFilterSetting.collect {
-                noteFilterSettings = it
                 _uiState.emit(NoteFilterUiState.FilterState(it.deadlineTag, it.status))
                 Log.d("tuanminh", "$it: ")
             }
