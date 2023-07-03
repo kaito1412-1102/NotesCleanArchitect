@@ -70,6 +70,15 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(platform(libs.androidx.compose.bom))
 
+    //navigation compose
+    implementation(libs.androidx.navigation.compose)
+
+    //Paging compose
+    implementation(libs.androidx.paging.compose)
+
+    //Hilt compose
+    implementation(libs.androidx.hilt.compose)
+
     //activity xml
     implementation(libs.androidx.appcompat)
     implementation(libs.google.android.material)
