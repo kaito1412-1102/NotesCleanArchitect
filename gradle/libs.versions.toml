@@ -21,6 +21,7 @@ androidxDataStore = "1.0.0"
 protobufPlugin = "0.9.3"
 protobuf = "3.21.12"
 androidxHiltCompose = "1.0.0"
+maxkeppelerSheetsComposeDialogs = "1.2.0"
 
 junit4 = "4.13.2"
 androidxTestExt = "1.1.5"
@@ -58,7 +59,8 @@ protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref 
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPagingCompose" }
 androidx-hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltCompose" }
-
+maxkeppeler-sheets-compose-dialogs-core = { group = "com.maxkeppeler.sheets-compose-dialogs", name = "core", version.ref = "maxkeppelerSheetsComposeDialogs" }
+maxkeppeler-sheets-compose-dialogs-calendar = { group = "com.maxkeppeler.sheets-compose-dialogs", name = "calendar", version.ref = "maxkeppelerSheetsComposeDialogs" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }

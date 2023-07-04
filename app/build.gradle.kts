@@ -79,6 +79,10 @@ dependencies {
     //Hilt compose
     implementation(libs.androidx.hilt.compose)
 
+    //Calendar compose
+    implementation(libs.maxkeppeler.sheets.compose.dialogs.core)
+    implementation(libs.maxkeppeler.sheets.compose.dialogs.calendar)
+
     //activity xml
     implementation(libs.androidx.appcompat)
     implementation(libs.google.android.material)

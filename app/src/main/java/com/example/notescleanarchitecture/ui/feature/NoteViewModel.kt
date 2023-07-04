@@ -1,4 +1,4 @@
-package com.example.notescleanarchitecture.presentation
+package com.example.notescleanarchitecture.ui.feature
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

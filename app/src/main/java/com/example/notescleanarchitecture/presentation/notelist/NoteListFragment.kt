@@ -13,7 +13,7 @@ import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
 import com.example.notescleanarchitecture.extension.asCollectFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
-import com.example.notescleanarchitecture.presentation.NoteViewModel
+import com.example.notescleanarchitecture.ui.feature.NoteViewModel
 import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
 import dagger.hilt.android.AndroidEntryPoint

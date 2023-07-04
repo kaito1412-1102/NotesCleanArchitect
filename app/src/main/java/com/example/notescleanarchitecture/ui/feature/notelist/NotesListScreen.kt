@@ -1,5 +1,6 @@
-package com.example.notescleanarchitecture.presentation.notelist
+package com.example.notescleanarchitecture.ui.feature.notelist
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
@@ -37,10 +39,11 @@ import com.example.model.Note
 import com.example.model.Status
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.extension.formatDateStyle1
+import com.example.notescleanarchitecture.navigation.Screen
 import com.example.notescleanarchitecture.utils.Constants
 
 @Composable
-fun NotesListScreen(notes: LazyPagingItems<Note>, onNoteItemClick: (note: Note?) -> Unit) {
+fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
         Toolbar(notes.itemCount)
 
@@ -63,7 +66,13 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, onNoteItemClick: (note: Note?)
                 items(notes) { note ->
                     NoteItem(
                         note = note,
-                        onNoteItemClick = onNoteItemClick
+                        onNoteItemClick = {
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                key = Constants.ARG_NOTE,
+                                value = note
+                            )
+                            navController.navigate(Screen.NoteDetail.route)
+                        }
                     )
                 }
             }
@@ -124,7 +133,7 @@ fun NoteItem(note: Note?, onNoteItemClick: (note: Note?) -> Unit) {
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                text = stringResource(id = R.string.title_deadline, lastUpdate),
+                text = stringResource(id = R.string.title_deadline, deadline.formatDateStyle1()),
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.Black,
             )
