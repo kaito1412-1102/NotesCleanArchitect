@@ -83,6 +83,9 @@ dependencies {
     implementation(libs.maxkeppeler.sheets.compose.dialogs.core)
     implementation(libs.maxkeppeler.sheets.compose.dialogs.calendar)
 
+    //swipe refresh compose
+    implementation(libs.google.accompanist.swiperefresh)
+
     //activity xml
     implementation(libs.androidx.appcompat)
     implementation(libs.google.android.material)

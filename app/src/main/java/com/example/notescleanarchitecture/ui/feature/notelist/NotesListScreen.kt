@@ -43,6 +43,8 @@ import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.extension.formatDateStyle1
 import com.example.notescleanarchitecture.navigation.Screen
 import com.example.notescleanarchitecture.utils.Constants
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) {
@@ -60,36 +62,43 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) 
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                Toolbar(notes.itemCount)
+            val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = true)
+            SwipeRefresh(state = swipeRefreshState, onRefresh = {
+                notes.refresh()
+            }) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    Toolbar(notes.itemCount)
 
-                val context = LocalContext.current
-                LaunchedEffect(key1 = notes.loadState, block = {
-                    if (notes.loadState.refresh is LoadState.Error) {
-                        Toast.makeText(context, "Error: ${(notes.loadState.refresh as LoadState.Error).error.message}", Toast.LENGTH_SHORT).show()
-                    }
-                })
-                if (notes.loadState.refresh is LoadState.Loading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        items(notes) { note ->
-                            NoteItem(
-                                note = note,
-                                onNoteItemClick = {
-                                    navController.currentBackStackEntry?.savedStateHandle?.set(
-                                        key = Constants.ARG_NOTE,
-                                        value = note
-                                    )
-                                    navController.navigate(Screen.NoteDetail.route)
-                                }
-                            )
+                    val context = LocalContext.current
+                    LaunchedEffect(key1 = notes.loadState, block = {
+                        if (notes.loadState.refresh is LoadState.Error) {
+                            Toast.makeText(context, "Error: ${(notes.loadState.refresh as LoadState.Error).error.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                    if (notes.loadState.refresh is LoadState.Loading) {
+                        /*CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )*/
+                        swipeRefreshState.isRefreshing = true
+                    } else {
+                        swipeRefreshState.isRefreshing = false
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            items(notes) { note ->
+                                NoteItem(
+                                    note = note,
+                                    onNoteItemClick = {
+                                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                                            key = Constants.ARG_NOTE,
+                                            value = note
+                                        )
+                                        navController.navigate(Screen.NoteDetail.route)
+                                    }
+                                )
+                            }
                         }
                     }
                 }
