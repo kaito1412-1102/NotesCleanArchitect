@@ -244,8 +244,6 @@ U
 %app/src/main/res/layout/item_note.xml,3\c\3cf651017b78bf491a2ace76a7b1eab64f2e9606
 y
 Iapp/src/main/java/com/example/notescleanarchitecture/extension/ViewExt.kt,1\9\194d8c0967a9e970d1f06f4a38cdae4c5d553fac
-{
-Kapp/src/main/java/com/example/notescleanarchitecture/extension/StringExt.kt,9\9\99153cf66967db90e93b96b18a97fc504e01e2cb
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 v

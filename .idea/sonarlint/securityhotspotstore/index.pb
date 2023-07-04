@@ -244,8 +244,6 @@ R
 "app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
 y
 Iapp/src/main/java/com/example/notescleanarchitecture/extension/ViewExt.kt,1\9\194d8c0967a9e970d1f06f4a38cdae4c5d553fac
-{
-Kapp/src/main/java/com/example/notescleanarchitecture/extension/StringExt.kt,9\9\99153cf66967db90e93b96b18a97fc504e01e2cb
 ‹
 [app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteAdapter.kt,b\b\bbed918bbe1c1ff731c13e58f0706d11f8933d0d
 v

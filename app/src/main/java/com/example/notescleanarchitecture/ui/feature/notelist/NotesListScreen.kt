@@ -76,10 +76,9 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) 
                         }
                     })
                     if (notes.loadState.refresh is LoadState.Loading) {
-                        /*CircularProgressIndicator(
+                        CircularProgressIndicator(
                             modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )*/
-                        swipeRefreshState.isRefreshing = true
+                        )
                     } else {
                         swipeRefreshState.isRefreshing = false
                         LazyColumn(

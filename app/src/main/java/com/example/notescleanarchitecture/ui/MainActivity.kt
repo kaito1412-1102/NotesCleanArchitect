@@ -17,9 +17,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NotesCleanArchitectureTheme {
+                val viewModel = hiltViewModel<NoteViewModel>()
+                val notes = viewModel.getAllNotes().collectAsLazyPagingItems()
                 val navController = rememberNavController()
 
-                SetupNavGraph(navController = navController)
+                SetupNavGraph(navController = navController, notes = notes)
             }
         }
     }
