@@ -6,8 +6,6 @@ A
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 u
 Eapp/src/main/java/com/example/notescleanarchitecture/MyApplication.kt,2\6\265eae082ea5e6a8090c0013ad7219a8f86609bd
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
 N
@@ -60,10 +58,6 @@ u
 Ecore/database/src/main/java/com/example/database/di/DatabaseModule.kt,3\6\36c12ddfc3f80e9855ff0626e939f10a0fcfe8d4
 p
 @core/database/src/main/java/com/example/database/NoteDatabase.kt,5\f\5f7740087985630f7f8b7b0302ae5479ba0a12d8
-å
-\app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteFragment.kt,1\5\15b12534aa83df9fa12062c8732199fb9532bd1b
-ã
-[app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteAdapter.kt,b\b\bbed918bbe1c1ff731c13e58f0706d11f8933d0d
 q
 Acore/domain/src/main/java/com/example/domain/SearchNoteUseCase.kt,1\2\1204da474e261a4b262e5c366f241d0554cab881
 l
@@ -106,10 +100,6 @@ I
 gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
 Å
 Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
-b
-2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
-Å
-Qapp/src/main/java/com/example/notescleanarchitecture/presentation/MainActivity.kt,c\6\c675d9b510d25a358b9b863cdf3db79419c17bd0
 w
 Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
 E

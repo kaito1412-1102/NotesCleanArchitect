@@ -114,10 +114,10 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                         .build()
                 datePicker.addOnPositiveButtonClickListener {
                     Log.d(TAG, "actionButton: $it - ${it.formatDate()}")
-                    if (validateDate(it)) {
+//                    if (validateDate(it)) {
                         datePickerValue = it
                         binding.tvDeadline.text = it.formatDateStyle1()
-                    }
+//                    }
                 }
                 datePicker.show(requireActivity().supportFragmentManager, null)
             }

@@ -4,8 +4,6 @@ A
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 u
 Eapp/src/main/java/com/example/notescleanarchitecture/MyApplication.kt,2\6\265eae082ea5e6a8090c0013ad7219a8f86609bd
 F
@@ -60,10 +58,6 @@ q
 Acore/database/src/main/java/com/example/database/NoteMigration.kt,f\9\f90494d7debba4f9f8cabbd0698f680082632b2d
 {
 Kapp/src/main/java/com/example/notescleanarchitecture/extension/StringExt.kt,9\9\99153cf66967db90e93b96b18a97fc504e01e2cb
-å
-\app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteFragment.kt,1\5\15b12534aa83df9fa12062c8732199fb9532bd1b
-ã
-[app/src/main/java/com/example/notescleanarchitecture/presentation/notedetail/NoteAdapter.kt,b\b\bbed918bbe1c1ff731c13e58f0706d11f8933d0d
 q
 Acore/domain/src/main/java/com/example/domain/SearchNoteUseCase.kt,1\2\1204da474e261a4b262e5c366f241d0554cab881
 l
@@ -106,8 +100,6 @@ _core/datastore/src/main/proto/com/example/notescleanarchitecture/notes_filter_p
 Pcore/datastore/src/main/java/com/example/datastore/NotesPreferencesSerializer.kt,8\5\857f424393738cbe489e5003fcac1bae0c68847e
 Å
 Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
-b
-2core/model/src/main/java/com/example/model/Note.kt,e\d\ed06c5d79d0e4a00617064f5792de5f2abfddbe5
 w
 Gapp/src/main/java/com/example/notescleanarchitecture/utils/Constants.kt,1\a\1a13b49958f0a1f4276e5146beb90d0206f37de8
 E
@@ -116,5 +108,3 @@ J
 core/data/build.gradle.kts,f\4\f4478630ebacf5eb78d8fddbf2b884e78aef0d50
 i
 9core/data/src/main/java/com/example/data/di/DataModule.kt,8\0\803b754b1348055f34d012660d722cbcd3a1e8b0
-Å
-Qapp/src/main/java/com/example/notescleanarchitecture/presentation/MainActivity.kt,c\6\c675d9b510d25a358b9b863cdf3db79419c17bd0
