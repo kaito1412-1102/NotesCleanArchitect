@@ -2,7 +2,6 @@ package com.example.notescleanarchitecture.ui.feature.notedetail
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -14,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.model.Note
@@ -21,10 +21,10 @@ import com.example.model.Status
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.ui.feature.NoteViewModel
 import com.example.notescleanarchitecture.ui.feature.notedetail.component.CalendarDialog
+import com.example.notescleanarchitecture.ui.feature.notedetail.component.CustomAlertDialog
 import com.example.notescleanarchitecture.ui.feature.notedetail.component.NoteDetail
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteDetailScreen(navController: NavController, note: Note?, viewModel: NoteViewModel = hiltViewModel()) {
 
@@ -40,22 +40,48 @@ fun NoteDetailScreen(navController: NavController, note: Note?, viewModel: NoteV
     CalendarDialog(calendarState = calendarState) {
         deadline = it
     }
+    val openDeleteAlertDialog = remember { mutableStateOf(false) }
+    CustomAlertDialog(
+        openDialog = openDeleteAlertDialog,
+        title = stringResource(id = R.string.title_delete_note),
+        msg = stringResource(id = R.string.msg_delete_note),
+        positiveButtonText = stringResource(id = R.string.title_yes),
+        negativeButtonText = stringResource(id = R.string.title_no),
+        positiveButtonClick = {
+            note?.let {
+                viewModel.removeNote(note)
+                navController.popBackStack()
+            }
+        }
+    )
+
+    val openInsertAlertDialog = remember { mutableStateOf(false) }
+    CustomAlertDialog(
+        openDialog = openInsertAlertDialog,
+        title = stringResource(id = R.string.title_add_note_error),
+        msg = stringResource(id = R.string.msg_add_note_error),
+    )
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    val currentTime = System.currentTimeMillis()
-                    val newNote = Note(
-                        id = id,
-                        title = title,
-                        content = content,
-                        creationTime = note?.creationTime ?: currentTime,
-                        updateTime = currentTime,
-                        deadline = deadline,
-                        status = status
-                    )
-                    viewModel.addNote(newNote)
-                    navController.popBackStack()
+                    if(title.isEmpty() || content.isEmpty()){
+                        openInsertAlertDialog.value = true
+                        return@FloatingActionButton
+                    }else{
+                        val currentTime = System.currentTimeMillis()
+                        val newNote = Note(
+                            id = id,
+                            title = title,
+                            content = content,
+                            creationTime = note?.creationTime ?: currentTime,
+                            updateTime = currentTime,
+                            deadline = deadline,
+                            status = status
+                        )
+                        viewModel.addNote(newNote)
+                        navController.popBackStack()
+                    }
                 },
             ) {
                 Icon(painter = painterResource(id = R.drawable.ic_check), contentDescription = "Add note")
@@ -81,6 +107,9 @@ fun NoteDetailScreen(navController: NavController, note: Note?, viewModel: NoteV
                     },
                     contentChange = {
                         content = it
+                    },
+                    onDeleteNote = {
+                        openDeleteAlertDialog.value = true
                     }
                 )
             }

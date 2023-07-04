@@ -1,6 +1,5 @@
 package com.example.notescleanarchitecture.ui.feature.notelist
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,8 +15,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,36 +46,52 @@ import com.example.notescleanarchitecture.utils.Constants
 
 @Composable
 fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Toolbar(notes.itemCount)
+    Scaffold(floatingActionButton = {
+        FloatingActionButton(
+            onClick = {
+                navController.navigate(Screen.NoteDetail.route)
+            },
+        ) {
+            Icon(painter = painterResource(id = R.drawable.ic_create), contentDescription = "Add note")
+        }
+    }) { paddingValues ->
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Toolbar(notes.itemCount)
 
-        val context = LocalContext.current
-        LaunchedEffect(key1 = notes.loadState, block = {
-            if (notes.loadState.refresh is LoadState.Error) {
-                Toast.makeText(context, "Error: ${(notes.loadState.refresh as LoadState.Error).error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-        if (notes.loadState.refresh is LoadState.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            ) {
-                items(notes) { note ->
-                    NoteItem(
-                        note = note,
-                        onNoteItemClick = {
-                            navController.currentBackStackEntry?.savedStateHandle?.set(
-                                key = Constants.ARG_NOTE,
-                                value = note
-                            )
-                            navController.navigate(Screen.NoteDetail.route)
-                        }
+                val context = LocalContext.current
+                LaunchedEffect(key1 = notes.loadState, block = {
+                    if (notes.loadState.refresh is LoadState.Error) {
+                        Toast.makeText(context, "Error: ${(notes.loadState.refresh as LoadState.Error).error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                if (notes.loadState.refresh is LoadState.Loading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        items(notes) { note ->
+                            NoteItem(
+                                note = note,
+                                onNoteItemClick = {
+                                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                                        key = Constants.ARG_NOTE,
+                                        value = note
+                                    )
+                                    navController.navigate(Screen.NoteDetail.route)
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }

@@ -23,6 +23,14 @@
     <string name="title_apply">Apply</string>
     <string name="title_cancel">Cancel</string>
     <string name="cancel_button">Cancel</string>
-    <string name="ok_button">Ok</string>
+    <string name="ok_button">OK</string>
     <string name="apply_button">Apply</string>
+
+    <string name="title_delete_note">Delete Note?</string>
+    <string name="msg_delete_note">Do you want to delete this note?</string>
+    <string name="title_yes">Yes</string>
+    <string name="title_no">No</string>
+    <string name="title_add_note_error">Add note error!</string>
+    <string name="msg_add_note_error">Please fill title, content and choose deadline for this note!</string>
+
 </resources>

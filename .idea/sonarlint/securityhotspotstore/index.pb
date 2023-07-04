@@ -242,8 +242,6 @@ U
 %app/src/main/res/layout/item_note.xml,3\c\3cf651017b78bf491a2ace76a7b1eab64f2e9606
 R
 "app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
-Å
-Qapp/src/main/java/com/example/notescleanarchitecture/presentation/BaseFragment.kt,6\e\6eb4e3e8a876ad4809167099de55f26dd7695973
 y
 Iapp/src/main/java/com/example/notescleanarchitecture/extension/ViewExt.kt,1\9\194d8c0967a9e970d1f06f4a38cdae4c5d553fac
 {

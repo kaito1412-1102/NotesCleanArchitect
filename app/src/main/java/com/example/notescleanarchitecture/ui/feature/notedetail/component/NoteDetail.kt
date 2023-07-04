@@ -17,6 +17,10 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,15 +38,14 @@ fun NoteDetail(
     content: String,
     statusChange: (Status) -> Unit,
     titleChange: (String) -> Unit,
-    contentChange: (String) -> Unit
+    contentChange: (String) -> Unit,
+    onDeleteNote: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Toolbar(status) {
-            statusChange.invoke(it)
-        }
+        Toolbar(status = status, onStatusChange = statusChange, onDeleteNote = onDeleteNote)
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,7 +105,7 @@ fun NoteDetail(
 }
 
 @Composable
-fun Toolbar(status: Status, onStatusChange: (status: Status) -> Unit) {
+fun Toolbar(status: Status, onStatusChange: (status: Status) -> Unit, onDeleteNote: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,6 +134,9 @@ fun Toolbar(status: Status, onStatusChange: (status: Status) -> Unit) {
         Icon(
             modifier = Modifier
                 .size(44.dp)
+                .clickable {
+                    onDeleteNote.invoke()
+                }
                 .padding(10.dp),
             painter = painterResource(id = R.drawable.ic_delete),
             contentDescription = null
