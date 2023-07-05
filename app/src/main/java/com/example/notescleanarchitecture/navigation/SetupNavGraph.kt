@@ -10,6 +10,7 @@ import com.example.model.Note
 import com.example.notescleanarchitecture.ui.feature.filter.NoteFilterScreen
 import com.example.notescleanarchitecture.ui.feature.notedetail.NoteDetailScreen
 import com.example.notescleanarchitecture.ui.feature.notelist.NotesListScreen
+import com.example.notescleanarchitecture.ui.feature.search.SearchScreen
 import com.example.notescleanarchitecture.utils.Constants
 
 @Composable
@@ -25,8 +26,11 @@ fun SetupNavGraph(
             val note = navController.previousBackStackEntry?.savedStateHandle?.get<Note>(Constants.ARG_NOTE)
             NoteDetailScreen(navController, note)
         }
-        composable(route = Screen.NoteFilter.route){
+        composable(route = Screen.NoteFilter.route) {
             NoteFilterScreen(navController)
+        }
+        composable(route = Screen.SearchNote.route) {
+            SearchScreen(navController)
         }
     }
 }

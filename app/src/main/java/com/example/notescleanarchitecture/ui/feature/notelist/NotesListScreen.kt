@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -71,7 +70,7 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) 
                         filterButtonClick = {
                             navController.navigate(Screen.NoteFilter.route)
                         }, searchButtonClick = {
-
+                            navController.navigate(Screen.SearchNote.route)
                         })
 
                     val context = LocalContext.current
@@ -81,9 +80,9 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) 
                         }
                     })
                     if (notes.loadState.refresh is LoadState.Loading) {
-                        CircularProgressIndicator(
+                       /* CircularProgressIndicator(
                             modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
+                        )*/
                     } else {
                         swipeRefreshState.isRefreshing = false
                         LazyColumn(

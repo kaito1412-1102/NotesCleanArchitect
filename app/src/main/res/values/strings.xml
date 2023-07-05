@@ -7,7 +7,7 @@
     <string name="title_deadline">Deadline: %s</string>
     <string name="title_last_update">Last update: %s</string>
     <string name="title_memory_notes">Memory Notes</string>
-    <string name="title_search_note">Search note</string>
+    <string name="hint_search_note">Search note</string>
     <string name="msg_no_notes_found">No notes found</string>
     <string name="deadline_tag_all_type">All type</string>
     <string name="deadline_tag_today_type">Today</string>

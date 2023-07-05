@@ -28,12 +28,12 @@ class MainActivity : ComponentActivity() {
                 val shouldUpdateNotes = remember { mutableStateOf(false) }
 
                 LaunchedEffect(key1 = true, block = {
-                    Log.d("tuanminh", "onCreate: 1")
+//                    Log.d("tuanminh", "onCreate: 1")
                     viewModel.init()
                     viewModel.uiState.collect {
                         when (it) {
                             NoteViewModel.NoteUiState.FilterSettingsApply -> {
-                                Log.d("tuanminh", "FilterSettingsApply: ")
+//                                Log.d("tuanminh", "FilterSettingsApply: ")
                                 shouldUpdateNotes.value = true
                                 shouldUpdateNotes.value = false
                             }
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     }
                 })
                 if (shouldUpdateNotes.value) {
-                    Log.d("tuanminh", "update")
+//                    Log.d("tuanminh", "update")
                     val notes = viewModel.getAllNotes().collectAsLazyPagingItems()
                     SetupNavGraph(navController = navController, notes = notes)
                 }
