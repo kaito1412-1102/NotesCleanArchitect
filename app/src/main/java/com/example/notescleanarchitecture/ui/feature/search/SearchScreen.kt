@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,10 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.navigation.Screen
 import com.example.notescleanarchitecture.ui.feature.NoteViewModel
@@ -48,16 +44,6 @@ fun SearchScreen(navController: NavController, viewModel: NoteViewModel = hiltVi
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        /*       TextField(
-                   modifier = Modifier.fillMaxWidth(),
-                   value = searchText.value,
-                   onValueChange = { value ->
-                       searchText.value = value
-                   },
-                   placeholder = {
-                       Text(text = stringResource(id = R.string.hint_search_note))
-                   })*/
-
         SearchBar(
             modifier = Modifier
                 .fillMaxWidth()
