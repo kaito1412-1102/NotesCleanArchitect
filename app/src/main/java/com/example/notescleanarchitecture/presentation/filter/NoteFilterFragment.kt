@@ -10,9 +10,9 @@ import com.example.model.OptionItem
 import com.example.model.StatusFilter
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentNoteFilterBinding
-import com.example.notescleanarchitecture.extension.asCollectFlow
 import com.example.notescleanarchitecture.extension.showSelectDialog
 import com.example.notescleanarchitecture.presentation.BaseFragment
+import com.example.notescleanarchitecture.ui.feature.filter.NoteFilterViewModel
 import com.example.notescleanarchitecture.utils.MockData
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -75,7 +75,7 @@ class NoteFilterFragment : BaseFragment<FragmentNoteFilterBinding>(FragmentNoteF
     }
 
     private fun collectData() {
-        asCollectFlow(viewModel.uiState) {
+        /*asCollectFlow(viewModel.uiState) {
             when (it) {
                 is NoteFilterViewModel.NoteFilterUiState.FilterState -> {
                     currentDeadlineTagFilter = it.deadlineTag
@@ -88,7 +88,7 @@ class NoteFilterFragment : BaseFragment<FragmentNoteFilterBinding>(FragmentNoteF
                 }
             }
 
-        }
+        }*/
         viewModel.getFilterSettings()
     }
 

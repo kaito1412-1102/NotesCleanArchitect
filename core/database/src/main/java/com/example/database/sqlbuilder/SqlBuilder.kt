@@ -28,9 +28,9 @@ class SqlBuilder {
 
         val conditionStatusSql = if (status != StatusFilter.ALL.toString()) "status = \"$status\"" else ""
         val conditionDeadlineTagSql = when (deadlineTag) {
-            DeadlineTagFilter.TODAY.toString() -> "date(deadline_time / 1000, 'unixepoch') = date('now')"
-            DeadlineTagFilter.UPCOMING.toString() -> "date(deadline_time / 1000, 'unixepoch') > date('now')"
-            DeadlineTagFilter.OVERDUE.toString() -> "date(deadline_time / 1000, 'unixepoch') < date('now')"
+            DeadlineTagFilter.TODAY.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') = date('now')"
+            DeadlineTagFilter.UPCOMING.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') > date('now')"
+            DeadlineTagFilter.OVERDUE.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') < date('now')"
             else -> ""
         }
         return "SELECT * FROM NOTE $haveCondition $conditionStatusSql $haveAndCondition $conditionDeadlineTagSql $sortCondition"

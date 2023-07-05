@@ -73,7 +73,7 @@ class OfflineNoteRepository @Inject constructor(
         get() = notesPreferenceDataSource.notesFilterSettings
 
     override suspend fun saveFilter(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter) {
-        Log.d("tuanminh", "sql: ${SqlBuilder().withConditionDeadlineFilter(deadlineTagFilter).withConditionStatus(statusFilter).build()}")
+//        Log.d("tuanminh", "sql: ${SqlBuilder().withConditionDeadlineFilter(deadlineTagFilter).withConditionStatus(statusFilter).build()}")
         notesPreferenceDataSource.saveFilter(deadlineTagFilter, statusFilter)
     }
 }

@@ -1,6 +1,8 @@
-package com.example.notescleanarchitecture.presentation.filter
+package com.example.notescleanarchitecture.ui.feature.filter
 
 import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.repository.NoteRepository
@@ -17,27 +19,41 @@ class NoteFilterViewModel @Inject constructor(
     private val noteRepository: NoteRepository,
 ) : ViewModel() {
 
-    private var _uiState = MutableSharedFlow<NoteFilterUiState>()
-    val uiState = _uiState.asSharedFlow()
+    private var _deadlineTagState = mutableStateOf(DeadlineTagFilter.ALL)
+    val deadlineTagState: State<DeadlineTagFilter> = _deadlineTagState
 
-    fun getFilterSettings(){
+    private var _statusState = mutableStateOf(StatusFilter.ALL)
+    val statusState: State<StatusFilter> = _statusState
+
+    private val _eventFlow = MutableSharedFlow<NoteFilterUiState>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+    fun getFilterSettings() {
         viewModelScope.launch {
             noteRepository.notesFilterSetting.collect {
-                _uiState.emit(NoteFilterUiState.FilterState(it.deadlineTag, it.status))
-                Log.d("tuanminh", "$it: ")
+                Log.d("tuanminh", "NoteFilterViewModel: $it ")
+                _deadlineTagState.value = it.deadlineTag
+                _statusState.value = it.status
             }
         }
+    }
+
+    fun setDeadlineTag(deadlineTag: DeadlineTagFilter) {
+        _deadlineTagState.value = deadlineTag
+    }
+
+    fun setStatus(status: StatusFilter) {
+        _statusState.value = status
     }
 
     fun saveFilter(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter) {
         viewModelScope.launch {
             noteRepository.saveFilter(deadlineTagFilter, statusFilter)
-            _uiState.emit(NoteFilterUiState.SaveFilterDone)
+            _eventFlow.emit(NoteFilterUiState.SaveFilterDone)
         }
     }
 
     sealed interface NoteFilterUiState {
-        data class FilterState(val deadlineTag: DeadlineTagFilter, val status: StatusFilter) : NoteFilterUiState
         object SaveFilterDone : NoteFilterUiState
     }
 }

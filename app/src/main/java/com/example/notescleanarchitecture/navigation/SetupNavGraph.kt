@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
 import com.example.model.Note
+import com.example.notescleanarchitecture.ui.feature.filter.NoteFilterScreen
 import com.example.notescleanarchitecture.ui.feature.notedetail.NoteDetailScreen
 import com.example.notescleanarchitecture.ui.feature.notelist.NotesListScreen
 import com.example.notescleanarchitecture.utils.Constants
@@ -22,12 +23,10 @@ fun SetupNavGraph(
         }
         composable(route = Screen.NoteDetail.route) {
             val note = navController.previousBackStackEntry?.savedStateHandle?.get<Note>(Constants.ARG_NOTE)
-
-            /*  LaunchedEffect(key1 = it, block = {
-                  Log.d("tuanminh", "NoteDetailScreen: $note")
-              })*/
-            Log.d("tuanminh", "NoteDetailScreen 1: $note")
             NoteDetailScreen(navController, note)
+        }
+        composable(route = Screen.NoteFilter.route){
+            NoteFilterScreen(navController)
         }
     }
 }

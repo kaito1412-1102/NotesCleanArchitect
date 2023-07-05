@@ -67,7 +67,12 @@ fun NotesListScreen(notes: LazyPagingItems<Note>, navController: NavController) 
                 notes.refresh()
             }) {
                 Column(modifier = Modifier.fillMaxSize()) {
-                    Toolbar(notes.itemCount)
+                    Toolbar(itemCount = notes.itemCount,
+                        filterButtonClick = {
+                            navController.navigate(Screen.NoteFilter.route)
+                        }, searchButtonClick = {
+
+                        })
 
                     val context = LocalContext.current
                     LaunchedEffect(key1 = notes.loadState, block = {
@@ -205,7 +210,7 @@ fun NoteItem(note: Note?, onNoteItemClick: (note: Note?) -> Unit) {
 }
 
 @Composable
-fun Toolbar(itemCount: Int) {
+fun Toolbar(itemCount: Int, filterButtonClick: () -> Unit, searchButtonClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -224,6 +229,9 @@ fun Toolbar(itemCount: Int) {
         Icon(
             modifier = Modifier
                 .size(44.dp)
+                .clickable {
+                    filterButtonClick.invoke()
+                }
                 .padding(10.dp),
             painter = painterResource(id = R.drawable.ic_filter),
             contentDescription = null
@@ -232,6 +240,9 @@ fun Toolbar(itemCount: Int) {
         Icon(
             modifier = Modifier
                 .size(44.dp)
+                .clickable {
+                    searchButtonClick.invoke()
+                }
                 .padding(10.dp),
             painter = painterResource(id = R.drawable.ic_search),
             contentDescription = null

@@ -61,6 +61,11 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, pr
         return noteUseCase.getAllNote.invoke(deadlineTagFilter, statusFilter).cachedIn(viewModelScope)
     }
 
+    override fun onCleared() {
+        Log.d("tuanminh", "onCleared: ")
+        super.onCleared()
+    }
+
     sealed interface NoteUiState {
         object FilterSettingsApply : NoteUiState
     }
