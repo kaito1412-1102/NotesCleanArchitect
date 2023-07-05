@@ -23,14 +23,14 @@ class SqlBuilder {
         val haveAndCondition = if (status != StatusFilter.ALL.toString() && deadlineTag != DeadlineTagFilter.ALL.toString()) "AND" else ""
 
         val sortCondition =
-            if (haveCondition == "") "ORDER BY (CASE WHEN date(deadline_time / 1000, 'unixepoch') = date('now') THEN 0 ELSE 1 END) ASC, date(deadline_time / 1000, 'unixepoch') DESC"
+            if (haveCondition == "") "ORDER BY (CASE WHEN date(deadline_time / 1000, 'unixepoch', 'localtime') = date('now') THEN 0 ELSE 1 END), date(deadline_time / 1000, 'unixepoch') DESC"
             else ""
 
         val conditionStatusSql = if (status != StatusFilter.ALL.toString()) "status = \"$status\"" else ""
         val conditionDeadlineTagSql = when (deadlineTag) {
-            DeadlineTagFilter.TODAY.toString() -> "date(deadline_time / 1000, 'unixepoch') = date('now')"
-            DeadlineTagFilter.UPCOMING.toString() -> "date(deadline_time / 1000, 'unixepoch') > date('now')"
-            DeadlineTagFilter.OVERDUE.toString() -> "date(deadline_time / 1000, 'unixepoch') < date('now')"
+            DeadlineTagFilter.TODAY.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') = date('now')"
+            DeadlineTagFilter.UPCOMING.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') > date('now')"
+            DeadlineTagFilter.OVERDUE.toString() -> "date(deadline_time / 1000, 'unixepoch', 'localtime') < date('now')"
             else -> ""
         }
         return "SELECT * FROM NOTE $haveCondition $conditionStatusSql $haveAndCondition $conditionDeadlineTagSql $sortCondition"
