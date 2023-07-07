@@ -21,6 +21,9 @@ interface NoteDao {
     @RawQuery(observedEntities = [NoteEntity::class])
     fun getAllNoteEntity(query: SupportSQLiteQuery): PagingSource<Int, NoteEntity>
 
+    @RawQuery(observedEntities = [NoteEntity::class])
+    fun getAllNoteForNotification(query: SupportSQLiteQuery): List<NoteEntity>
+
     @Query("SELECT * FROM note WHERE title LIKE '%' || :input || '%' OR status LIKE '%' || :input || '%' ")
     fun searchNoteTitle(input: String): PagingSource<Int, NoteEntity>
 

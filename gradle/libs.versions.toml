@@ -19,6 +19,8 @@ androidxPaging = "3.1.1"
 androidxDataStore = "1.0.0"
 protobufPlugin = "0.9.3"
 protobuf = "3.21.12"
+androidxWorkManager = "2.8.1"
+hiltExt = "1.0.0"
 
 junit4 = "4.13.2"
 androidxTestExt = "1.1.5"
@@ -53,6 +55,9 @@ androidx-datastore = { group = "androidx.datastore", name = "datastore", version
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+androidx-work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidxWorkManager" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }

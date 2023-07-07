@@ -1,6 +1,7 @@
 package com.example.data.repository
 
 import androidx.paging.PagingData
+import com.example.database.model.NoteEntity
 import com.example.model.DeadlineTagFilter
 import com.example.model.Note
 import com.example.model.NotesFilterSettings
@@ -11,6 +12,7 @@ interface NoteRepository {
     suspend fun add(note: Note)
     fun get(id: Long): Flow<Note?>
     fun getAll(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): Flow<PagingData<Note>>
+    fun getAllNoteForNotification(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): List<Note>
     fun searchNote(input: String): Flow<PagingData<Note>>
     suspend fun remove(note: Note)
 

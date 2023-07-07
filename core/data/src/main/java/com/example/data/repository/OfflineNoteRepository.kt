@@ -42,13 +42,18 @@ class OfflineNoteRepository @Inject constructor(
         ),
         pagingSourceFactory = {
             val query = SqlBuilder().withConditionDeadlineFilter(deadlineTagFilter).withConditionStatus(statusFilter).build()
-            Log.d("tuanminh", "getAll: $query")
+//            Log.d("tuanminh", "getAll: $query")
             noteDao.getAllNoteEntity(SimpleSQLiteQuery(query))
         }
     ).flow.map { pagingData ->
         pagingData.map {
             it.toNote()
         }
+    }
+
+    override fun getAllNoteForNotification(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): List<Note> {
+        val query = SqlBuilder().withConditionDeadlineFilter(deadlineTagFilter).withConditionStatus(statusFilter).build()
+        return noteDao.getAllNoteForNotification(SimpleSQLiteQuery(query)).map { it.toNote() }
     }
 
     override fun searchNote(input: String): Flow<PagingData<Note>> = Pager(

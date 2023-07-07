@@ -44,7 +44,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
 
     private fun initView() {
         currentNote?.let { note ->
-            binding.apply {
+            binding?.apply {
                 edtTitle.text = Editable.Factory.getInstance().newEditable(note.title)
                 edtContent.text = Editable.Factory.getInstance().newEditable(note.content)
                 buttonDelete.visibility = View.VISIBLE
@@ -58,11 +58,11 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                 datePickerValue = note.deadline
             }
         }
-        binding.tvDeadline.text = requireContext().getString(R.string.title_deadline, datePickerValue.formatDateStyle1())
+        binding?.tvDeadline?.text = requireContext().getString(R.string.title_deadline, datePickerValue.formatDateStyle1())
     }
 
     private fun actionButton() {
-        binding.apply {
+        binding?.apply {
             buttonCheck.setOnClickListener {
                 val title = edtTitle.text.toString()
                 val content = edtContent.text.toString()
@@ -116,7 +116,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                     Log.d(TAG, "actionButton: $it - ${it.formatDate()}")
 //                    if (validateDate(it)) {
                         datePickerValue = it
-                        binding.tvDeadline.text = it.formatDateStyle1()
+                        binding?.tvDeadline?.text = it.formatDateStyle1()
 //                    }
                 }
                 datePicker.show(requireActivity().supportFragmentManager, null)
@@ -126,12 +126,12 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                 when (status) {
                     Status.TODO -> {
                         status = Status.DONE
-                        binding.buttonTodo.setImageResource(R.drawable.ic_done)
+                        binding?.buttonTodo?.setImageResource(R.drawable.ic_done)
                     }
 
                     else -> {
                         status = Status.TODO
-                        binding.buttonTodo.setImageResource(R.drawable.ic_todo)
+                        binding?.buttonTodo?.setImageResource(R.drawable.ic_todo)
                     }
                 }
             }

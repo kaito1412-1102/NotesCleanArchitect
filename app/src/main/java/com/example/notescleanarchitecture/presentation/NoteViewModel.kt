@@ -12,7 +12,6 @@ import com.example.model.Note
 import com.example.model.NotesFilterSettings
 import com.example.model.StatusFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,14 +21,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, private val noteRepository: NoteRepository) : ViewModel() {
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private var noteFilterSettings: NotesFilterSettings? = null
     private var _uiState = MutableSharedFlow<NoteUiState>()
     val uiState = _uiState.asSharedFlow()
 
     fun init(){
-        coroutineScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             noteRepository.notesFilterSetting.collect {
                 Log.d("tuanminh", "NoteViewModel: $it: ")
                 noteFilterSettings = it
@@ -39,13 +37,13 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, pr
     }
 
     fun addNote(note: Note) {
-        coroutineScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             noteUseCase.addNote.invoke(note)
         }
     }
 
     fun removeNote(note: Note) {
-        coroutineScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             noteUseCase.removeNote.invoke(note)
         }
     }
@@ -57,7 +55,7 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, pr
     fun getAllNotes(): Flow<PagingData<Note>> {
         val deadlineTagFilter = noteFilterSettings?.deadlineTag ?: DeadlineTagFilter.ALL
         val statusFilter = noteFilterSettings?.status ?: StatusFilter.ALL
-        Log.d("tuanminh", "getAllNotes: $deadlineTagFilter - $statusFilter")
+//        Log.d("tuanminh", "getAllNotes: $deadlineTagFilter - $statusFilter")
         return noteUseCase.getAllNote.invoke(deadlineTagFilter, statusFilter).cachedIn(viewModelScope)
     }
 

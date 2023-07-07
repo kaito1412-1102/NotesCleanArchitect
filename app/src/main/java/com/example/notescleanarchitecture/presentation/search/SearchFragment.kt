@@ -25,7 +25,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
+        binding?.searchView?.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     collectLifeCycleFlow(flow = viewModel.searchNotes(it), collector = { notes ->
@@ -39,21 +39,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
                 return false
             }
         })
-        binding.rvNotes.adapter = noteAdapter
-        binding.swipeRefreshLayout.isEnabled = false
+        binding?.rvNotes?.adapter = noteAdapter
+        binding?.swipeRefreshLayout?.isEnabled = false
         collectData()
     }
 
     private fun collectData() {
         collectLifeCycleFlow(noteAdapter.loadStateFlow) {
             if (it.refresh is LoadState.NotLoading) {
-                binding.tvMsgNotFound.isVisible = noteAdapter.itemCount == 0
-                binding.swipeRefreshLayout.isRefreshing = false
+                binding?.tvMsgNotFound?.isVisible = noteAdapter.itemCount == 0
+                binding?.swipeRefreshLayout?.isRefreshing = false
             }
             if (it.refresh is LoadState.Loading) {
-                binding.swipeRefreshLayout.isRefreshing = true
+                binding?.swipeRefreshLayout?.isRefreshing = true
             }
-            binding.progressBar.isVisible = it.source.append is LoadState.Loading
+            binding?.progressBar?.isVisible = it.source.append is LoadState.Loading
         }
     }
 

@@ -36,7 +36,7 @@ class NoteFilterFragment : BaseFragment<FragmentNoteFilterBinding>(FragmentNoteF
         deadlineTagFilterOptions = MockData.deadlineTagFilterOptions(requireContext())
         statusFilterOptions = MockData.statusFilterOptions(requireContext())
 
-        binding.apply {
+        binding?.apply {
             tvTypeDeadLineTag.setOnClickListener {
                 val currentOption = deadlineTagFilterOptions.firstOrNull {
                     it.value == currentDeadlineTagFilter
@@ -96,11 +96,11 @@ class NoteFilterFragment : BaseFragment<FragmentNoteFilterBinding>(FragmentNoteF
         val deadlineTagOption = deadlineTagFilterOptions.firstOrNull {
             it.value == currentDeadlineTagFilter
         }
-        binding.tvTypeDeadLineTag.text = deadlineTagOption?.displayName ?: getString(R.string.deadline_tag_all_type)
+        binding?.tvTypeDeadLineTag?.text = deadlineTagOption?.displayName ?: getString(R.string.deadline_tag_all_type)
 
         val statusOption = statusFilterOptions.firstOrNull {
             it.value == currentStatusFilter
         }
-        binding.tvTypeStatus.text = statusOption?.displayName ?: getString(R.string.status_all_type)
+        binding?.tvTypeStatus?.text = statusOption?.displayName ?: getString(R.string.status_all_type)
     }
 }

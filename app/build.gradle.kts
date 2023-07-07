@@ -91,7 +91,12 @@ dependencies {
 
     //hilt
     implementation(libs.dagger.hilt.android)
+    implementation(libs.hilt.ext.work)
     kapt(libs.dagger.hilt.android.compiler)
+    kapt(libs.hilt.ext.compiler)
+
+    //work manager
+    implementation(libs.androidx.work.runtime)
 
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidx.test.ext)

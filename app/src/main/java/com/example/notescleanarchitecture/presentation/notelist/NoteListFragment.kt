@@ -1,5 +1,6 @@
 package com.example.notescleanarchitecture.presentation.notelist
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.model.Note
 import com.example.notescleanarchitecture.R
 import com.example.notescleanarchitecture.databinding.FragmentListBinding
 import com.example.notescleanarchitecture.extension.asCollectFlow
+import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
@@ -26,28 +28,57 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-        actionButton()
-        collectData()
+        val intent = requireActivity().intent
+        val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(ARG_NOTE, Note::class.java)
+        } else {
+            intent.getParcelableExtra(ARG_NOTE)
+        }
+        Log.d("tuanminh", "onViewCreated: $note")
+
+        if (note != null) {
+            intent.putExtra(ARG_NOTE, null as Note?)
+            val bundle = bundleOf(ARG_NOTE to note)
+            navController.navigate(R.id.action_list_to_note, bundle)
+        } else {
+            Log.d("tuanminh", "onViewCreated 1: $note")
+            initView()
+            actionButton()
+            collectData()
+        }
+    }
+
+    private fun startNoteDetailFromNotification() {
+        val intent = requireActivity().intent
+        val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(ARG_NOTE, Note::class.java)
+        } else {
+            intent.getParcelableExtra(ARG_NOTE)
+        }
+        note?.let {
+            val bundle = bundleOf(ARG_NOTE to it)
+            navController.navigate(R.id.action_list_to_note, bundle)
+        }
+        Log.d("tuanminh", "onViewCreated: $note")
     }
 
     private fun actionButton() {
-        binding.buttonAddNote.setOnClickListener {
+        binding?.buttonAddNote?.setOnClickListener {
             goToDetails()
         }
-        binding.swipeRefreshLayout.setOnRefreshListener {
+        binding?.swipeRefreshLayout?.setOnRefreshListener {
             noteAdapter.refresh()
         }
-        binding.buttonSearch.setOnClickListener {
+        binding?.buttonSearch?.setOnClickListener {
             findNavController().navigate(R.id.action_list_to_search)
         }
-        binding.buttonFilter.setOnClickListener {
+        binding?.buttonFilter?.setOnClickListener {
             findNavController().navigate(R.id.action_list_to_filter)
         }
     }
 
     private fun initView() {
-        binding.apply {
+        binding?.apply {
             rvNotes.adapter = noteAdapter
         }
     }
@@ -60,18 +91,18 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         })
 
         asCollectFlow(noteAdapter.loadStateFlow) {
-            Log.d("tuanminh", "collectData: loading:${noteAdapter.itemCount} - ${it.append} - ${it.refresh} -${it.source}")
+//            Log.d("tuanminh", "collectData: loading:${noteAdapter.itemCount} - ${it.append} - ${it.refresh} -${it.source}")
             if (it.append is LoadState.NotLoading) {
-                binding.swipeRefreshLayout.isRefreshing = false
+                binding?.swipeRefreshLayout?.isRefreshing = false
             }
-            binding.tvCount.text = noteAdapter.itemCount.toString()
-            binding.progressBar.isVisible = it.source.append is LoadState.Loading
+            binding?.tvCount?.text = noteAdapter.itemCount.toString()
+            binding?.progressBar?.isVisible = it.source.append is LoadState.Loading
         }
         viewModel.init()
     }
 
     private fun collectNotes() {
-        asCollectFlow(flow = viewModel.getAllNotes(), collector = {
+        collectLifeCycleFlow(flow = viewModel.getAllNotes(), collector = {
             noteAdapter.submitData(it)
         })
     }
