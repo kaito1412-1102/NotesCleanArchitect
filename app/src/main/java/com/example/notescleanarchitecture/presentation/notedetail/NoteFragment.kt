@@ -110,7 +110,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
                 val datePicker =
                     MaterialDatePicker.Builder.datePicker()
                         .setTitleText("Select date")
-                        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                        .setSelection(currentNote?.deadline ?: MaterialDatePicker.todayInUtcMilliseconds())
                         .build()
                 datePicker.addOnPositiveButtonClickListener {
                     Log.d(TAG, "actionButton: $it - ${it.formatDate()}")

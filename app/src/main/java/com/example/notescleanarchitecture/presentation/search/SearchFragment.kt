@@ -13,9 +13,10 @@ import com.example.notescleanarchitecture.databinding.FragmentSearchBinding
 import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.presentation.NoteViewModel
-import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment
+import com.example.notescleanarchitecture.presentation.notelist.NoteAdapter
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate), NoteAdapter.OnNoteClickListener {
@@ -41,6 +42,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         })
         binding?.rvNotes?.adapter = noteAdapter
         binding?.swipeRefreshLayout?.isEnabled = false
+        binding?.searchView?.post {
+            binding?.searchView?.onActionViewExpanded()
+        }
         collectData()
     }
 

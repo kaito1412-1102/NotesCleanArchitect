@@ -1,4 +1,4 @@
-package com.example.notescleanarchitecture.presentation.notedetail
+package com.example.notescleanarchitecture.presentation.notelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

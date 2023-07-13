@@ -16,7 +16,6 @@ import com.example.notescleanarchitecture.extension.asCollectFlow
 import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.presentation.NoteViewModel
-import com.example.notescleanarchitecture.presentation.notedetail.NoteAdapter
 import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
 import dagger.hilt.android.AndroidEntryPoint
 

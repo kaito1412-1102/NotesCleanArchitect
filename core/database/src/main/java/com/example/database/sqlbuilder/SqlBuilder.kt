@@ -23,8 +23,9 @@ class SqlBuilder {
         val haveAndCondition = if (status != StatusFilter.ALL.toString() && deadlineTag != DeadlineTagFilter.ALL.toString()) "AND" else ""
 
         val sortCondition =
-            if (haveCondition == "") "ORDER BY (CASE WHEN date(deadline_time / 1000, 'unixepoch', 'localtime') = date('now') THEN 0 ELSE 1 END), date(deadline_time / 1000, 'unixepoch') DESC"
-            else ""
+            if (haveCondition == "")
+                "ORDER BY (CASE WHEN date(deadline_time / 1000, 'unixepoch', 'localtime') = date('now') THEN 0 WHEN date(deadline_time / 1000, 'unixepoch', 'localtime') > date('now') THEN 1 ELSE 2 END), date(deadline_time / 1000, 'unixepoch') ASC"
+            else "ORDER BY deadline_time ASC"
 
         val conditionStatusSql = if (status != StatusFilter.ALL.toString()) "status = \"$status\"" else ""
         val conditionDeadlineTagSql = when (deadlineTag) {
