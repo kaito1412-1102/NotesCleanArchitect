@@ -14,8 +14,7 @@ interface NoteRepository {
     fun getAll(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): Flow<PagingData<Note>>
     fun getAllNoteForNotification(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter): List<Note>
     fun searchNote(input: String): Flow<PagingData<Note>>
-    suspend fun remove(note: Note)
-
-    val notesFilterSetting: Flow<NotesFilterSettings>
+    fun remove(note: Note)
+    fun getFilterNote(): Flow<NotesFilterSettings>
     suspend fun saveFilter(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter)
 }

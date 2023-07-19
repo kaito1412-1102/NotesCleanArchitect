@@ -11,7 +11,9 @@ import com.example.model.DeadlineTagFilter
 import com.example.model.Note
 import com.example.model.NotesFilterSettings
 import com.example.model.StatusFilter
+import com.example.notescleanarchitecture.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,15 +22,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, private val noteRepository: NoteRepository) : ViewModel() {
+class NoteViewModel @Inject constructor(
+    private val noteUseCase: NoteUseCase,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) : ViewModel() {
 
     private var noteFilterSettings: NotesFilterSettings? = null
     private var _uiState = MutableSharedFlow<NoteUiState>()
     val uiState = _uiState.asSharedFlow()
 
-    fun init(){
-        viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.notesFilterSetting.collect {
+    fun init() {
+        viewModelScope.launch(ioDispatcher) {
+            noteUseCase.getFilterNote.invoke().collect {
                 Log.d("tuanminh", "NoteViewModel: $it: ")
                 noteFilterSettings = it
                 _uiState.emit(NoteUiState.FilterSettingsApply)
@@ -37,13 +42,13 @@ class NoteViewModel @Inject constructor(private val noteUseCase: NoteUseCase, pr
     }
 
     fun addNote(note: Note) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             noteUseCase.addNote.invoke(note)
         }
     }
 
     fun removeNote(note: Note) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             noteUseCase.removeNote.invoke(note)
         }
     }

@@ -16,7 +16,7 @@ import com.example.notescleanarchitecture.extension.asCollectFlow
 import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.presentation.NoteViewModel
-import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
+import com.example.notescleanarchitecture.utils.Constants.ARG_NOTE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,14 +33,12 @@ class NoteListFragment : BaseFragment<FragmentListBinding>(FragmentListBinding::
         } else {
             intent.getParcelableExtra(ARG_NOTE)
         }
-        Log.d("tuanminh", "onViewCreated: $note")
 
         if (note != null) {
             intent.putExtra(ARG_NOTE, null as Note?)
             val bundle = bundleOf(ARG_NOTE to note)
             navController.navigate(R.id.action_list_to_note, bundle)
         } else {
-            Log.d("tuanminh", "onViewCreated 1: $note")
             initView()
             actionButton()
             collectData()

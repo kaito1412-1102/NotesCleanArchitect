@@ -1,6 +1,9 @@
 package com.example.notescleanarchitecture.extension
 
+import android.content.Context
+import android.content.DialogInterface
 import android.widget.NumberPicker
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -23,7 +26,7 @@ fun <T> Fragment.collectLifeCycleFlow(flow: Flow<T>, collector: FlowCollector<T>
     }
 }
 
-fun <T> Fragment.jobCollectLifeCycleFlow(flow: Flow<T>, collector: FlowCollector<T>):Job {
+fun <T> Fragment.jobCollectLifeCycleFlow(flow: Flow<T>, collector: FlowCollector<T>): Job {
     return viewLifecycleOwner.lifecycleScope.launch {
         ensureActive()
         viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -79,4 +82,30 @@ fun <T> Fragment.showSelectDialog(
             list.indexOf(currentValue)
         }
     }
+}
+
+fun Context.showAlert(
+    title: String,
+    message: String,
+    positiveButtonText: String,
+    negativeButtonText: String? = null,
+    onPositiveButtonClick: ((dialog: DialogInterface) -> Unit)? = null,
+    onNegativeButtonClick: ((dialog: DialogInterface) -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
+) {
+    val builder = AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(positiveButtonText) { dialog, _ ->
+            onPositiveButtonClick?.invoke(dialog)
+        }
+    negativeButtonText?.let {
+        builder.setNegativeButton(it) { dialog, _ ->
+            onNegativeButtonClick?.invoke(dialog)
+        }
+    }
+    builder.setOnDismissListener {
+        onDismiss?.invoke()
+    }
+    builder.create().show()
 }

@@ -14,6 +14,7 @@ import com.example.notescleanarchitecture.extension.formatDate
 import com.example.notescleanarchitecture.extension.formatDateStyle1
 import com.example.notescleanarchitecture.presentation.NoteViewModel
 import com.example.notescleanarchitecture.presentation.BaseFragment
+import com.example.notescleanarchitecture.utils.Constants.ARG_NOTE
 import com.example.notescleanarchitecture.utils.Constants.INVALID_LONG_VALUE
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -152,7 +153,6 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(FragmentNoteBinding::infl
     }
 
     companion object {
-        const val ARG_NOTE = "ARG_NOTE"
         const val TAG = "NoteFragment"
     }
 }

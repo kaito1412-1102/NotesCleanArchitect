@@ -28,5 +28,5 @@ interface NoteDao {
     fun searchNoteTitle(input: String): PagingSource<Int, NoteEntity>
 
     @Delete
-    suspend fun deleteNoteEntity(noteEntity: NoteEntity)
+    fun deleteNoteEntity(noteEntity: NoteEntity)
 }

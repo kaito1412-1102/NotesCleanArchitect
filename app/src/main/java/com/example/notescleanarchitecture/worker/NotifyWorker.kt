@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.hilt.work.HiltWorker
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -19,7 +20,8 @@ import com.example.model.DeadlineTagFilter
 import com.example.model.Note
 import com.example.model.StatusFilter
 import com.example.notescleanarchitecture.presentation.MainActivity
-import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment.Companion.ARG_NOTE
+import com.example.notescleanarchitecture.utils.Constants.ARG_NOTE
+import com.example.notescleanarchitecture.utils.Constants.CHANNEL_ID
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.util.Calendar
@@ -70,12 +72,10 @@ class NotifyWorker @AssistedInject constructor(
 
 
     companion object {
-        const val CHANNEL_ID = "CHANNEL_ID"
-
-        //        fun startNotifyWork() = OneTimeWorkRequestBuilder<NotifyWorker>().build()
-        fun startNotifyWork() = PeriodicWorkRequestBuilder<NotifyWorker>(1, TimeUnit.DAYS)
-            .setInitialDelay(calculateInitialDelay(), TimeUnit.MILLISECONDS)
-            .build()
+        fun startNotifyWork() = OneTimeWorkRequestBuilder<NotifyWorker>().build()
+        /* fun startNotifyWork() = PeriodicWorkRequestBuilder<NotifyWorker>(1, TimeUnit.DAYS)
+             .setInitialDelay(calculateInitialDelay(), TimeUnit.MILLISECONDS)
+             .build()*/
 
         private fun calculateInitialDelay(): Long {
             val currentTime = System.currentTimeMillis()

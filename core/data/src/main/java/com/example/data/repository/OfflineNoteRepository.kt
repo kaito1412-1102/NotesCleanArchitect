@@ -70,12 +70,13 @@ class OfflineNoteRepository @Inject constructor(
         }
     }
 
-    override suspend fun remove(note: Note) {
+    override  fun remove(note: Note) {
         return noteDao.deleteNoteEntity(NoteEntity.fromNote(note))
     }
 
-    override val notesFilterSetting: Flow<NotesFilterSettings>
-        get() = notesPreferenceDataSource.notesFilterSettings
+    override fun getFilterNote(): Flow<NotesFilterSettings> {
+        return notesPreferenceDataSource.notesFilterSettings
+    }
 
     override suspend fun saveFilter(deadlineTagFilter: DeadlineTagFilter, statusFilter: StatusFilter) {
         Log.d("tuanminh", "sql: ${SqlBuilder().withConditionDeadlineFilter(deadlineTagFilter).withConditionStatus(statusFilter).build()}")

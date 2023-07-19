@@ -13,8 +13,8 @@ import com.example.notescleanarchitecture.databinding.FragmentSearchBinding
 import com.example.notescleanarchitecture.extension.collectLifeCycleFlow
 import com.example.notescleanarchitecture.presentation.BaseFragment
 import com.example.notescleanarchitecture.presentation.NoteViewModel
-import com.example.notescleanarchitecture.presentation.notedetail.NoteFragment
 import com.example.notescleanarchitecture.presentation.notelist.NoteAdapter
+import com.example.notescleanarchitecture.utils.Constants.ARG_NOTE
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -62,7 +62,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     override fun onNoteItemClick(note: Note) {
-        val bundle = bundleOf(NoteFragment.ARG_NOTE to note)
+        val bundle = bundleOf(ARG_NOTE to note)
         navController.navigate(R.id.action_search_to_note, bundle)
     }
 }

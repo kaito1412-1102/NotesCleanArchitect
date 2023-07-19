@@ -23,6 +23,10 @@
     <string name="title_apply">Apply</string>
     <string name="title_cancel">Cancel</string>
     <string name="cancel_button">Cancel</string>
-    <string name="ok_button">Ok</string>
+    <string name="ok_button">OK</string>
     <string name="apply_button">Apply</string>
+
+    <string name="title_permission_requested">Permission Required</string>
+    <string name="message_notification_permission_requested">This app required Notification permission to remind you about list note need todo in today</string>
+
 </resources>
